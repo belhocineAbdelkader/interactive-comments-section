@@ -1,0 +1,45 @@
+@use "sass:color";
+
+/// @name $palettes
+/// A map of color palettes, where keys are identifiers mapped to a given color
+/// @type Color
+/// @prop {String} keys - Keys are identifiers mapped to a given color
+/// @prop {Map} values - Values are actual after key: value
+
+// Display-p3 palette
+
+$palettes-type2: (
+    neutral: (
+        "white": hsl(0, 0%, 100%),
+        "black": hsl(0, 0%, 0%),
+        "off-white": hsl(36, 100%, 99%)
+    ),
+
+    primary: (
+        "orange": hsl(35, 77%, 62%),
+        "red": hsl(5, 85%, 63%)
+    ),
+    blue: (
+        "100": hsl(233, 8%, 79%),
+        "500": hsl(236, 13%, 42%),
+        "900": hsl(240, 100%, 5%)
+    )
+) !default;
+
+$palettes-regular: (
+    neutral: (
+        "white": #ffffff,
+        "black": #000000,
+        "off-white": #fffdfa,
+    ),
+
+    primary: (
+        "orange": #e9ab53,
+        "red": #f15e50
+    ),
+    blue: (
+        "100": #c5c6ce,
+        "500": #5d5f79,
+        "900": #00001a
+    )
+) !default;

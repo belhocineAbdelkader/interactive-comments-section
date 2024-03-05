@@ -1,0 +1,47 @@
+@use "sass:math";
+@use "../abstracts" as *;
+
+@layer grid-system {
+    @layer container {
+        /*! container */
+        @each $screen-size, $value in $container-width {
+            @if $screen-size == md {
+                .container {
+                    --container-padding: 1rem;
+                    // max-width: 1440px;
+                    width: #{$value};
+                    margin-inline: auto;
+                    padding-inline: var(--container-padding);
+                }
+            } @else {
+                @include mq($screen-size) {
+                    .container {
+                    --container-padding: 0;
+                        max-width: #{$value};
+                    }
+                }
+            }
+        }
+    }
+
+    .even-columns {
+        display: grid;
+        gap: var(--grid-gap, var(--gap-main));
+        @include mq(md) {
+            grid-auto-flow: column;
+            grid-auto-columns: 1fr;
+        }
+    }
+        // Create an intrinsically responsive grid layout, optionally using a CSS custom property to extend to variable contexts. Each column will resize at the same rate, and items will begin to break to a new row if the width reaches the --min value.
+        .grid-auto-fit {
+            --min: 15ch;
+            --gap: 1rem;
+            display: grid;
+            gap: var(--grid-gap, 1rem);
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
+        }
+
+        .flow > * + * {
+            margin-top: var(--margin-flow, 1rem);
+        }
+}

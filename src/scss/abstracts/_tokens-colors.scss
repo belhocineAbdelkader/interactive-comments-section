@@ -1,0 +1,64 @@
+$prefix: "clr";
+$enable-dark-mode: false;
+// default light
+
+$color-vars: (
+    link: (
+        text-100: var(--clr-blue-500),
+        text-200: var(--clr-neutral-off-white),
+        text-300: var(--clr-blue-900),
+        hover: var(--clr-primary-orange),
+        hover-secondary: var(--clr-primary-red)
+    ),
+    body: (
+        text: var(--clr-blue-500),
+        bg: var(--clr-neutral-off-white)
+    ),
+    outline: (
+        site: highlight,
+        style: solid,
+        color: var(--clr-primary-orange),
+        // site: -webkit-focus-ring-color,
+        // site: highlight,
+    ),
+    btn: (
+        text: var(--clr-neutral-off-white),
+        primary-bg: var(--clr-primary-red),
+        primary-bg-hover: var(--clr-blue-900)
+    ),
+    site-header: (
+        bg: var(--body-clr-bg),
+        text: var(--body-clr-text)
+    ),
+    main-title: (
+        color: var(--clr-blue-900)
+    ),
+    header-nav: (
+        link: var(--body-clr-text),
+        link-hover: var(--link-clr-hover)
+    ),
+    side: (
+        bg: var(--clr-blue-900),
+        title: var(--clr-primary-orange),
+        link: var(--clr-neutral-off-white),
+        link-hover: var(--clr-primary-orange),
+        text: var(--body-clr-text),
+        line: var(--side-clr-text)
+    ),
+    card: (
+        title-num: var(--clr-blue-500),
+        title: var(--clr-blue-900),
+        link-text: var(--card-clr-title),
+        link-hover: var(--link-clr-hover-secondary),
+    ),
+    selection: (
+        bg: var(--clr-primary-orange),
+        text: var(--clr-neutral-off-white)
+    ),
+    scrollbar: (
+        color: var(--clr-primary-red),
+        track-bg: var(--clr-neutral-off-white),
+        thumb-bg: var(--clr-primary-red),
+        thumb-bg-hover: var(--clr-primary-orange)
+    )
+);

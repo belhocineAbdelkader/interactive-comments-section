@@ -1,0 +1,110 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+@use "sass:meta";
+@use "sass:math";
+@use "sass:map";
+@use "variables" as *;
+//================= media mixins =================
+
+/// Media query mixin for responsive design.
+/// @mixin
+/// @param {String | Number} $size - Breakpoint size or numerical width.
+/// @param {String} $type - Type of media query, default is "min-width".
+/// @throws When using a number without a unit.
+/// @throws When the provided keyword is not in the $breakpoints map.
+/// @example
+/// map:
+/// $breakpoints: (sm: 30em, md: 45em, lg: 65em);
+///
+///   @include mq(md) {
+///     / Styles for screens larger than or equal to 45em.
+///   }
+///
+///   @include mq(600px, "max-width") {
+///     / Styles for screens smaller than or equal to 600px.
+///   }
+@mixin mq($size, $type: "min-width") {
+    @if map.has-key($breakpoints, $size) {
+        $breakpoint: map-get($breakpoints, $size);
+        @media screen and (#{$type}: $breakpoint) {
+            @content;
+        }
+    } @else if meta.type-of($size) == number {
+        @if math.is-unitless($size) {
+            @error 'when using a number with @mq() make sure to include a unit';
+        } @else {
+            @media screen and (#{$type}: $size) {
+                @content;
+            }
+        }
+    } @else {
+        @error 'the keyword #{$size} is not in the $breakpoints map';
+    }
+}
+
+/// Media query mixin for a range of screen sizes.
+///
+/// @param {String | Number} $size1 - Lower breakpoint size or numerical width.
+/// @param {String | Number} $size2 - Upper breakpoint size or numerical width.
+/// @throws When using a number without a unit.
+/// @throws When the provided keyword is not in the $breakpoints map.
+/// @example
+/// map:
+/// $breakpoints: (sm: 30em, md: 45em, lg: 65em);
+///
+///   @include mq-range(sm, md) {
+///      Styles for screens larger than or equal to 30em
+///      and smaller than or equal to 45em.
+///   }
+///   @include mq-range(600px, 900px) {
+///      Styles for screens larger than or equal to 600px
+///      and smaller than or equal to 900px.
+///   }
+@mixin mq-range($size1, $size2) {
+    @if map.has-key($breakpoints, $size1) and map.has-key($breakpoints, $size2)
+    {
+        $breakpoint1: map-get($breakpoints, $size1);
+        $breakpoint2: map-get($breakpoints, $size2);
+        @media only screen and (min-width: $breakpoint1) and (max-width: $breakpoint2) {
+            @content;
+        }
+    } @else if meta.type-of($size1) == number or meta.type-of($size2) == number
+    {
+        @if math.is-unitless($size1) or math.is-unitless($size2) {
+            @error 'when using a number with @mq() make sure to include a unit';
+        } @else {
+            @media only screen and (min-width: $size) and (max-width: $size2) {
+                @content;
+            }
+        }
+    } @else {
+        @error 'the keyword #{$size} is not in the $breakpoints map';
+    }
+}
+
+//========================= Event mixins (hover, active, focus, focus-within) ==============================
+
+/// Event wrapper
+/// @param {Bool} $self [false] - Whether or not to include current selector
+@mixin on-event($self: false) {
+    @if $self {
+        &,
+        &:hover,
+        &:active,
+        &:focus,
+        &:focus-within {
+            @content;
+        }
+    } @else {
+        &:hover,
+        &:active,
+        &:focus,
+        &:focus-within {
+            @content;
+        }
+    }
+}
+
+

@@ -1,0 +1,61 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+@layer button {
+    button,
+    .btn {
+        appearance: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn {
+        border-radius: var(--btn-border-radius);
+        cursor: pointer;
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        color: inherit;
+
+        /* span inside the btn that will hold icon or icon and text */
+        .btn-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            position: relative;
+        }
+
+        &.btn-primary {
+            background-color: var(--btn-clr-primary-bg);
+            color: var(--btn-clr-text);
+            padding: var(--btn-padding);
+            text-transform: uppercase;
+            letter-spacing: var(--btn-letter-spacing);
+            font-size: large;
+            font-weight: var(--fw-600);
+            transition: background-color var(--transition-1) linear;
+            &:hover{
+                background-color: var(--btn-clr-primary-bg-hover);
+            }
+        }
+    }
+
+    /* Button States */
+
+    .btn:hover,
+    .btn.hover {
+        .btn-wrap {
+            background-color: var(--btn-bg-hover, var(--btn-bg));
+        }
+    }
+
+    .btn:focus{
+        .btn-wrap {
+            border: 1px solid var(--btn-secondary-border-focus);
+            box-shadow: var(--btn-focus-effect);
+        }
+    }
+}

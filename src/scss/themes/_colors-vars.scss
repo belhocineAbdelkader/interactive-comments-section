@@ -1,0 +1,25 @@
+@use "../abstracts" as *;
+@use "sass:map";
+
+@layer colors-vars {
+    /* Fallback styles for browsers not supporting display-p3 */
+    :root {
+        @each $palette, $colorName in $palettes-regular {
+            @each $key, $value in $colorName {
+                $keyName: "--clr-" + $palette + "-" + $key;
+                #{$keyName}: #{$value};
+            }
+        }
+    }
+    /* Check if the browser supports display-p3 color space */
+    @supports (color: color(display-p3 1 1 1)) {
+        :root {
+            @each $palette, $colorName in $palettes-type2 {
+                @each $key, $value in $colorName {
+                    $keyName: "--clr-" + $palette + "-" + $key;
+                    #{$keyName}: #{$value};
+                }
+            }
+        }
+    }
+}

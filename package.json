@@ -1,0 +1,30 @@
+{
+  "name": "interactive-comments-section",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "watchTS": " tsc --outDir ./src/assets/js ./src/ts/main.ts --watch",
+    "eslint": "eslint .",
+    "prettier": "prettier --write .",
+    "linting": "npm-run-all --parallel prettier",
+    "watchSass": " sass --watch src/scss/main.scss src/assets/css/style.css ",
+    "convert-img": "node scripts/convert-img.js",
+    "start": "npm-run-all --parallel dev convert-img watchTS watchSass"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.2.5",
+    "sass": "^1.71.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4"
+  },
+  "dependencies": {
+    "imagemin": "^8.0.1",
+    "imagemin-webp": "^8.0.0",
+    "terser": "^5.28.1"
+  }
+}

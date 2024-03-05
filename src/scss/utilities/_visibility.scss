@@ -1,0 +1,16 @@
+@layer visibility {
+    .display-none{
+        display: none !important;
+    }
+    /** Hide element while making it readable for screen readers */
+    .only-sr:not(:focus):not(:active) {
+        clip: rect(0 0 0 0) !important;
+        clip-path: inset(100%) !important;
+        height: 1px !important;
+        width: 1px !important;
+        opacity: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        white-space: nowrap !important;
+    }
+}

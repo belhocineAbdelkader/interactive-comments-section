@@ -1,0 +1,32 @@
+@layer icons {
+    .icon {
+        --size: var(--icon-size, 1rem);
+        display: inline-block;
+        -webkit-mask-position: center;
+        mask-position: center;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        vertical-align: middle;
+        height: 1rem;
+        // height: var(--size);
+        // width: 1rem;
+        // width: var(--size);
+        
+        &.icon-menu {
+            width: 2rem;
+            // -webkit-mask-image: url('assets/images/icons/icon-menu.svg');
+            // mask-image: url('assets/images/icons/icon-menu.svg');
+        }
+
+        &.icon-menu-close {
+            // -webkit-mask-image: url('assets/images/icons/icon-menu-close.svg');
+            // mask-image: url('assets/images/icons/icon-menu-close.svg');
+        }
+
+        &.icon-logo {
+            --size: 2rem; 
+            -webkit-mask-image: url('assets/images/icons/logo.svg');
+            mask-image: url('assets/images/icons/logo.svg');
+        }
+    }
+}

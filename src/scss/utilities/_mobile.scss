@@ -1,0 +1,19 @@
+@use "../abstracts" as *;
+
+@layer control-display {
+    .only-desktop {
+        display: none !important;
+    }
+
+
+    @media screen and (min-width: 768px) {
+        .only-desktop {
+            display: inherit !important;
+        }
+
+        .only-mobile {
+            display: none !important;
+        }
+    }
+
+}

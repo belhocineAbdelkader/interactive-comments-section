@@ -1,0 +1,38 @@
+//
+// this file contains everything related to the
+// default theme.
+//
+
+@use "../abstracts" as *;
+@use "sass:color";
+@use "sass:meta";
+@use "sass:map";
+
+@layer light-theme {
+    .light {
+        font-palette: light; /* https://developer.mozilla.org/en-US/docs/Web/CSS/font-palette#examples */
+        color-scheme: light;
+        @each $subMap, $valueList in $color-vars {
+            $title: $subMap;
+            $subMap: map.get($color-vars, $subMap);
+
+            @each $key, $value in $subMap {
+                --#{$title}-#{$prefix}-#{$key}: #{$value};
+            }
+        }
+    }
+    @media (prefers-color-scheme: light) {
+        :root:not(.light):not(.dark) {
+            color-scheme: light;
+            font-palette: light;
+            @each $subMap, $valueList in $color-vars {
+                $title: $subMap;
+                $subMap: map.get($color-vars, $subMap);
+
+                @each $key, $value in $subMap {
+                    --#{$title}-#{$prefix}-#{$key}: #{$value};
+                }
+            }
+        }
+    }
+}

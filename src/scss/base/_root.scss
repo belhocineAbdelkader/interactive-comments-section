@@ -1,0 +1,20 @@
+@use "../abstracts" as *;
+@use "sass:map";
+
+@layer root {
+    :root {
+        @each $map, $supMap in $vars {
+            @each $key, $value in $supMap {
+                $keyName: "--" + $map + "-" + $key;
+                #{$keyName}: #{$value};
+            }
+        }
+        @media (prefers-contrast: more) {
+            --fw-body: 700;
+        }
+        @media (prefers-contrast: less) {
+            --fw-body: 200;
+        }
+    }
+}
+
