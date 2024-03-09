@@ -21,9 +21,11 @@
 
         /* span inside the btn that will hold icon or icon and text */
         .btn-wrap {
+            --btn-gap: .3rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: var(--btn-gap);
             background-color: transparent;
             position: relative;
         }

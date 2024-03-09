@@ -3,12 +3,7 @@
 
 @layer root {
     :root {
-        @each $map, $supMap in $vars {
-            @each $key, $value in $supMap {
-                $keyName: "--" + $map + "-" + $key;
-                #{$keyName}: #{$value};
-            }
-        }
+        @include tokensVars($vars);
         @media (prefers-contrast: more) {
             --fw-body: 700;
         }
@@ -17,4 +12,3 @@
         }
     }
 }
-

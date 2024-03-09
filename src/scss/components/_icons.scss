@@ -1,32 +1,42 @@
 @layer icons {
     .icon {
         --size: var(--icon-size, 1rem);
-        display: inline-block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         -webkit-mask-position: center;
         mask-position: center;
         -webkit-mask-repeat: no-repeat;
         mask-repeat: no-repeat;
         vertical-align: middle;
         height: 1rem;
-        // height: var(--size);
-        // width: 1rem;
-        // width: var(--size);
-        
-        &.icon-menu {
-            width: 2rem;
-            // -webkit-mask-image: url('assets/images/icons/icon-menu.svg');
-            // mask-image: url('assets/images/icons/icon-menu.svg');
-        }
+        height: var(--size);
+        width: 1rem;
+        width: var(--size);
+        background-color: var(--icon-bg);
 
-        &.icon-menu-close {
-            // -webkit-mask-image: url('assets/images/icons/icon-menu-close.svg');
-            // mask-image: url('assets/images/icons/icon-menu-close.svg');
+        &.icon-reply {
+            -webkit-mask-image: url('../images/icon-reply.svg');
+            mask-image: url('../images/icon-reply.svg');
         }
-
-        &.icon-logo {
-            --size: 2rem; 
-            -webkit-mask-image: url('assets/images/icons/logo.svg');
-            mask-image: url('assets/images/icons/logo.svg');
+        &.icon-edit {
+            -webkit-mask-image: url('../images/icon-edit.svg');
+            mask-image: url('../images/icon-edit.svg');
+        }
+        &.icon-delete {
+            --icon-bg: #ED6368;
+            -webkit-mask-image: url('../images/icon-delete.svg');
+            mask-image: url('../images/icon-delete.svg');
+        }
+        &.icon-minus {
+            --icon-bg: #C5C6EF;
+            -webkit-mask-image: url('../images/icon-minus.svg');
+            mask-image: url('../images/icon-minus.svg');
+        }
+        &.icon-plus {
+            --icon-bg: #C5C6EF;
+            -webkit-mask-image: url('../images/icon-plus.svg');
+            mask-image: url('../images/icon-plus.svg');
         }
     }
 }

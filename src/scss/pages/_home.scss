@@ -5,102 +5,21 @@
 
 @layer main {
   main {
-    margin-top: 2rem;
-    .hero-wrapper {
-      display: flex;
-      gap: 2rem;
+    margin-block: 5rem;
+    .comments {
 
-      @include mq(lg, "max-width") {
-        display: block;
+      .comment{
+        
       }
 
-      // style for hero selection
-      .hero {
-        .hero-content {
-          display: flex;
-          gap: 1rem;
-
-          @include mq(lg, "max-width") {
-            display: block;
-          }
-        }
-        .main-title {
-          h1 {
-            font-size: 2.8rem;
-            color: var(--main-title-clr-color);
-            text-wrap: wrap;
-          }
-        }
-
-        .hero-content-action {
-          p {
-            width: max(38ch, 100%);
-          }
+      &__sub-comments {
+        border-left: 5px solid var(--sub-comment-border);
+        padding-inline-start: 2rem;
+        @include mq(md) {
+          margin-inline-start: 2rem;
         }
       }
 
-      // said new posts
-      .side-posts {
-        @include mq(lg, "max-width") {
-          margin-top: 1.5rem;
-        }
-
-        min-width: 19.5rem;
-        background-color: var(--side-clr-bg);
-        color: var(--side-clr-text);
-        padding: 1rem;
-
-        ul > li:not(:last-child) {
-          border-bottom: 1px solid var(--side-clr-line);
-        }
-
-        h2 {
-          margin-top: 0;
-          color: var(--side-clr-title);
-          font-size: var(--side-title-fs);
-        }
-
-        h3 a {
-          color: var(--side-clr-link);
-          font-size: var(--side-sub-title-fs);
-          text-wrap: nowrap;
-          &:hover {
-            color: var(--side-clr-link-hover);
-          }
-        }
-
-        p {
-          margin-top: 0;
-          line-height: normal;
-        }
-      }
-    }
-
-    .cards {
-      margin-top: 2rem;
-      .cards-list {
-        --min: 31ch;
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
-      }
-      .img-card img {
-        width: 163px;
-        height: 172px;
-      }
-
-      .card-content a {
-        color: var(--card-clr-title);
-        transition: color var(--card-transition) linear;
-        &:hover {
-          color: var(--card-clr-link-hover);
-        }
-      }
-
-      .card-description {
-        width: 23ch;
-        margin-block: 1rem;
-      }
     }
   }
 }

@@ -6,6 +6,7 @@
 @use "sass:math";
 @use "sass:map";
 @use "variables" as *;
+@use "tokens-colors" as *;
 //================= media mixins =================
 
 /// Media query mixin for responsive design.
@@ -63,15 +64,13 @@
 ///      and smaller than or equal to 900px.
 ///   }
 @mixin mq-range($size1, $size2) {
-    @if map.has-key($breakpoints, $size1) and map.has-key($breakpoints, $size2)
-    {
+    @if map.has-key($breakpoints, $size1) and map.has-key($breakpoints, $size2) {
         $breakpoint1: map-get($breakpoints, $size1);
         $breakpoint2: map-get($breakpoints, $size2);
         @media only screen and (min-width: $breakpoint1) and (max-width: $breakpoint2) {
             @content;
         }
-    } @else if meta.type-of($size1) == number or meta.type-of($size2) == number
-    {
+    } @else if meta.type-of($size1) == number or meta.type-of($size2) == number {
         @if math.is-unitless($size1) or math.is-unitless($size2) {
             @error 'when using a number with @mq() make sure to include a unit';
         } @else {
@@ -84,6 +83,34 @@
     }
 }
 
+//========================= vars mixins () ==============================
+
+@mixin tokensVars($map) {
+    @each $map, $supMap in $map {
+        @each $key, $value in $supMap {
+            @if type-of($value) == 'map' {
+                @each $k , $v in $value {
+                    $keyName: "--" + $map + "-" + $key + "-" + $k;
+                    #{$keyName}: #{$v};
+                }
+            }@else{
+                $keyName: "--" + $map + "-" + $key;
+                #{$keyName}: #{$value};
+            }
+        }
+    }
+}
+
+@mixin tokensColorsVars($map) {
+    @each $subMap, $valueList in $map {
+        $title: $subMap;
+        $subMap: map.get($map, $subMap);
+
+        @each $key, $value in $subMap {
+            --#{$title}-#{$prefix}-#{$key}: #{$value};
+        }
+    }
+}
 //========================= Event mixins (hover, active, focus, focus-within) ==============================
 
 /// Event wrapper
@@ -106,5 +133,3 @@
         }
     }
 }
-
-

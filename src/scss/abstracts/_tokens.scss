@@ -4,26 +4,27 @@ $vars: (
     // typography
     ff:
         (
-            sans-serif: #{Inter,
+            sans-serif: #{Rubik,
             "Segoe UI",
-            Roboto,
             Helvetica,
             Arial,
             sans-serif}
         ),
     fs: (
-        400: clamp(0.9375rem, 0.9196rem + 0.0893vi, 1rem),
-        500: clamp(1.0625rem, 1.0089rem + 0.2679vi, 1.25rem),
-        600: clamp(1.1875rem, 1.1215rem + 0.2817vi, 1.375rem),
-        700: clamp(1.5625rem, 1.4085rem + 0.6573vi, 2rem),
-        800: clamp(1.8625rem, 1.7085rem + 0.6573vi, 2.5rem),
-        900: clamp(2.7994rem, 2.5093rem + 1.4505vi, 3.8147rem)
+        200: clamp(0.8784rem, 0.847rem + 0.1568vi, 0.9882rem),
+        300: clamp(0.9372rem, 0.9037rem + 0.1674vi, 1.0544rem),
+        400: clamp(1rem, 0.9643rem + 0.1786vi, 1.125rem),
+        500: clamp(1.067rem, 1.0289rem + 0.1905vi, 1.2004rem),
+        600: clamp(1.1385rem, 1.0978rem + 0.2033vi, 1.2808rem),
+        700: clamp(1.2148rem, 1.1714rem + 0.2169vi, 1.3666rem),
+        800: clamp(1.2962rem, 1.2499rem + 0.2315vi, 1.4582rem),
+        900: clamp(1.383rem, 1.3336rem + 0.247vi, 1.5559rem)
     ),
     fw: (
         400: 400,
         600: 600,
         700: 700,
-        800: 800,
+        800: 800
     ),
     body: (
         fw: var(--fw-400),
@@ -34,21 +35,18 @@ $vars: (
         font: var(--body-fw) var(--body-fs) / var(--body-line-height) var(--body-ff)
     ),
     h: (
-        1-fs: var(--fs-900),
-        2-fs: var(--fs-600),
+        1-fs: var(--fs-500),
+        2-fs: var(--fs-500),
         3-fs: var(--fs-500),
-        4-fs: var(--fs-500),
-        1-fw: var(--fw-800),
+        1-fw: var(--fw-700),
         2-fw: var(--fw-700),
         3-fw: var(--fw-700),
-        4-fw: var(--fw-400),
         line-height: 1.2,
         letter-spacing: 0.031rem,
         ff: var(--ff-sans-serif),
         1-font: var(--h-1-fw) var(--h-1-fs) / var(--h-line-height) var(--h-ff),
         2-font: var(--h-2-fw) var(--h-2-fs) / var(--h-line-height) var(--h-ff),
-        3-font: var(--h-3-fw) var(--h-3-fs) / var(--h-line-height) var(--h-ff),
-        4-font: var(--h-4-fw) var(--h-4-fs) / var(--h-line-height) var(--h-ff)
+        3-font: var(--h-3-fw) var(--h-3-fs) / var(--h-line-height) var(--h-ff)
     ),
     size: (
         60: 0.6rem,
@@ -56,69 +54,107 @@ $vars: (
         90: 0.9rem,
         50: 0.5rem,
         100: 1rem,
+        125: 1.25rem,
+        150: 1.5rem,
         175: 1.75rem,
         200: 2rem,
         300: 3rem,
-        325: 3.25rem,
-        350: 3.5rem,
-        400: 4rem,
-        425: 4.25rem,
-        450: 4.5rem,
-        475: 4.75rem
+        325: 3.25rem
     ),
     gap: (
-        main: var(--size-100, 1rem)
+        100: 1rem,
+        125: 1.25rem,
+        150: 1.5rem,
+        175: 1.75rem,
+        main: var(--gap-100, 1rem)
     ),
-    transition:(
-        1: .2s
+    transition: (
+        1: 0.2s
+    ),
+    border: (
+        main: 1px solid var(--border-clr-color),
+        focus: 1px solid var(--border-clr-focus)
     ),
     outline: (
-        site-size: max(2px, 0.08em),
+        style: solid,
+        site-size: 2px,
         site-style: solid
+    ),
+    radius: (
+        round: 50%,
+        100: 0.25rem,
+        200: 0.5rem,
+        300: 0.75rem,
+        400: 1rem,
+        main: var(--radius-400)
     ),
     link: (
         text-decoration: none,
         text-decoration-hover: none
     ),
+
     btn: (
         font: var(--body-ff),
-        text-transform: uppercase,
-        padding: .5rem 1rem,
-        letter-spacing: .3rem,
-        fw: var(--fw-600),
-        border: 0,
-        border-radius: 0,
+        cursor: pointer,
         transition: var(--transition-1),
+        gap: var(--gap-main),
+        primary: (
+            padding: 0.5rem 1rem,
+            text-transform: uppercase,
+            border: 0,
+            radius: var(--radius-200)
+        ),
+        counter: (
+            padding: 0.5rem 1rem,
+            gap: var(--gap-125)
+        ),
+        reply: (
+            padding: 0.5rem 1rem
+        ),
+        edit: (
+            padding: 0.5rem 1rem
+        ),
+        delete: (
+            padding: 0.5rem 1rem
+        ),
+        module-yes: (
+            padding: 0.5rem 1rem
+        ),
+        module-no: (
+            padding: var(--btn-module-yes-padding)
+        )
     ),
     icon: (
         size: var(--size-100, 1rem),
         height: var(--size-100, 1rem),
         width: var(--size-100, 1rem)
     ),
-    site-header: (
-        padding: 0 1,
-        margin: 0,
-        min-height: var(--size-400)
-    ),
-    main-nav: (
-        fs: var(--fs-600),
-        fw: 600,
-        padding: 0 1rem,
-        margin: 0,
-        gap: var(--gap-main),
-        link-text-decoration: none,
+    comment: (
         transition: var(--transition-1),
+        radius: var(--radius-main, 1rem),
+        userAvatar-radius: var(--radius-round),
+        userName-fs: var(--fs-300),
+        userName-fw: var(--fw-600),
+        gap: var(--gap-main),
+        padding: 2.2rem,
+        max-height: 5rem
     ),
-    side: (
-        title-fs: var(--fs-, 2.3rem),
-        sub-title-fs: var(--fs-, 1.1rem),
-        p-fs: var(--fs-body)
+    module: (
+        title-fs: var(--fs-500),
+        title-fw: var(--fw-600),
+        padding: 0.5rem 1rem,
+        btn-gap: var(--gap-main)
     ),
-    card: (
-        num-fs: 2rem,
-        heading-font-size: var(--h4-font),
-        transition: var(--transition-1)
-
+    form: (
+        radius: var(--radius-main),
+        padding: 2rem 2.2rem,
+    ),
+    input: (
+        border: 1px solid var(--input-border),
+        border-focus: 1px solid var(--input-focus),
+        radius: var(--radius-main),
+        max-hight: 4rem,
+        min-hight: 10rem,
     ),
     scrollbar: (
         height: 0.72rem,
@@ -126,6 +162,7 @@ $vars: (
         border-radius: 1000000000rem
     ),
     container: (
-        max-width: 100%
+        // max-width: 47.625rem
+        max-width: 775px
     )
 ) !default;

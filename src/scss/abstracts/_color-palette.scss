@@ -6,40 +6,55 @@
 /// @prop {String} keys - Keys are identifiers mapped to a given color
 /// @prop {Map} values - Values are actual after key: value
 
-// Display-p3 palette
+// oklch palette
 
+// https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl
 $palettes-type2: (
-    neutral: (
-        "white": hsl(0, 0%, 100%),
-        "black": hsl(0, 0%, 0%),
-        "off-white": hsl(36, 100%, 99%)
-    ),
-
-    primary: (
-        "orange": hsl(35, 77%, 62%),
-        "red": hsl(5, 85%, 63%)
+    neutral:(
+            "White": oklch(100% 0 0),
+            "black": oklch(0 0 0)
+        ),
+    gray: (
+        "100": oklch(97.3% 0.005 274.97), // lighter-gray
+        "200": oklch(94.2% 0.007 268.74),//Light-gray
     ),
     blue: (
-        "100": hsl(233, 8%, 79%),
-        "500": hsl(236, 13%, 42%),
-        "900": hsl(240, 100%, 5%)
+        "400": oklch(54.82% 0.023 250.02), //"grayish-blue"
+        "450": oklch(0.55 0.02 250.02 / .1), //"grayish-blue"
+        "800": oklch(37.05% 0.035 252.12), //"dark-blue"
+    ),
+    primary: (
+        "100": oklch(50.38% 0.147 278.25),
+        "200": oklch(83.29% 0.06 284.26),
+        "200-dark": oklch(72.84% 0.091 283.2),
+        "300": oklch(67.52% 0.17 20.82),
+        "400": oklch(84.86% 0.083 15.65)
     )
 ) !default;
 
 $palettes-regular: (
     neutral: (
-        "white": #ffffff,
-        "black": #000000,
-        "off-white": #fffdfa,
+        "White": #ffffff,
+        "black": #000000
     ),
 
-    primary: (
-        "orange": #e9ab53,
-        "red": #f15e50
+    gray: (
+        "100": #f5f6fa, // lighter-gray
+        "200": #eaecf1,
+        //Light-gray
     ),
+
     blue: (
-        "100": #c5c6ce,
-        "500": #5d5f79,
-        "900": #00001a
+        "400": #67727e,//"grayish-blue"
+        "450": #69737d33,
+        "800": #324152,
+        //"dark-blue"
+    ),
+    primary: (
+        "100": #5457b6,
+        "200": #c3c4ef,
+        "200-dark": #9fa0df,
+        "300": #ed6468,
+        "400": #ffb8bb
     )
 ) !default;
