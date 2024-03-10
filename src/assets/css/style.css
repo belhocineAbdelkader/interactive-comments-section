@@ -477,6 +477,7 @@
       background-color: var(--form-bg);
       border-radius: var(--form-radius);
       padding: var(--form-padding);
+      margin-bottom: 1.8rem;
     }
     .comment-form-container.send .comment-form-container__form, .comment-form-container.reply .comment-form-container__form {
       display: grid;
@@ -521,6 +522,20 @@
     }
     .comment-form-container .textarea::placeholder {
       transition: color 0.2s ease-in;
+    }
+  }
+  @layer overlay {
+    .dialog {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border: 1px solid #ccc;
+      z-index: 1000;
+    }
+    ::backdrop {
+      background-color: rgba(0, 0, 0, 0.7);
     }
   }
 }

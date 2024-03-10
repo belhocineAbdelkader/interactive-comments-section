@@ -1,6 +1,5 @@
 // import checkType from "./helpers/checkTypes";
 
-// import checkTypes from './helpers/checkTypes';
 class checkTypes {
   isArray = (val: any): val is Array<any> => Array.isArray(val);
 
@@ -71,8 +70,64 @@ type subComment = {
   },
 }
 
-// function to create html
+// event listener
 
+// content Loaded
+window.addEventListener("DOMContentLoaded", () => {
+  const app = document.getElementById('app') as HTMLDivElement;
+
+  // create the article to hold all element of comments
+  const postComments = document.createElement('article');
+  postComments.classList.add('post-comments');
+  app.appendChild(postComments);
+
+  // create form element
+  const sendForm = form('send');
+  app.appendChild(sendForm);
+
+  // fetching comment from server and display them in the web page
+  fetchComments(postComments);
+
+  // adding a comment
+  const input = (document.getElementById('comment-textarea') as HTMLTextAreaElement);
+  sendForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    addComment(postComments, input);
+  });
+
+  // handel key press
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      addComment(postComments, input);
+    }
+  });
+
+  // Event delegation for comment actions
+  postComments.addEventListener('click', (event): void => {
+    const target = (event.target as HTMLElement).closest('.btn');
+
+    if (target?.classList.contains('delete')) {
+      const commentID = (target.closest('article.comment') as HTMLElement)!.dataset.id as string
+      deleteComment(commentID);
+    } else if (target?.classList.contains('edit')) {
+      const commentID = (target.closest('article.comment') as HTMLElement)!.dataset.id as string
+      editComment(commentID);
+    } else if (target?.classList.contains('reply')) {
+      const commentHTML = (target.closest('article.comment') as HTMLElement)!;
+      console.log('commentHTML :', commentHTML);
+      replyComment(commentHTML);
+    }
+  });
+
+
+})
+
+
+// ============= Functions =============
+//----- functions -----
+// function to create html
+// form
 const form = (type: string) => {
   // create the form container
   const fromContainer = document.createElement('div');
@@ -175,58 +230,6 @@ const createComment = (id: number, content: string, createdAt: string, score: nu
       </div>
       </article>`;
 }
-
-// edit options
-// let editElement: HTMLElement,
-//   editFlag = false,
-//   editID = '';
-
-// event listener
-
-// content Loaded
-window.addEventListener("DOMContentLoaded", () => {
-  const app = document.getElementById('app') as HTMLDivElement;
-
-  // create the article to hold all element of comments
-  const postComments = document.createElement('article');
-  postComments.classList.add('post-comments');
-  app.appendChild(postComments);
-
-  // create form element
-  const sendForm = form('send');
-  app.appendChild(sendForm);
-
-  // fetching comment from server and display them in the web page
-  fetchComments(postComments);
-
-
-
-
-  // adding a comment
-  sendForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const input = (document.getElementById('comment-textarea') as HTMLTextAreaElement)
-    addComment(postComments, input);
-  });
-
-  // Event delegation for comment actions
-  postComments.addEventListener('click', (event) => {
-    const target = event.target as HTMLElement;
-    if (target.classList.contains('delete')) {
-      deleteComment(target.closest('.comment') as HTMLElement);
-    } else if (target.classList.contains('edit')) {
-      editComment(target.closest('.comment') as HTMLElement);
-    } else if (target.classList.contains('reply')) {
-      replyComment(target.closest('.comment') as HTMLElement);
-    }
-  });
-
-
-})
-
-
-// ============= Functions =============
-//----- functions -----
 function currentUserInfo(): currentUser {
   const currentUser = localStorage.getItem('currentUser') as string,
     currentUserInfo = JSON.parse(currentUser)
@@ -253,7 +256,7 @@ function commentObject(id: number, content: string, createdAt: string, score: nu
   const subComment: subComment = {
     id: id,
     content: content,
-    createdAt: 'string',
+    createdAt: createdAt,
     score: 0,
     replyingTo: replyingTo,
     user: {
@@ -261,7 +264,7 @@ function commentObject(id: number, content: string, createdAt: string, score: nu
         png: `./images/avatars/image-${username}.png`,
         webp: `./images/avatars/image-${username}.webp`,
       },
-      username: 'string'
+      username: username
     },
   }
 
@@ -271,57 +274,212 @@ function commentObject(id: number, content: string, createdAt: string, score: nu
   return comment;
 }
 
-// add comment
-function addComment(container: HTMLElement, input: HTMLTextAreaElement) {
-  const content = input.value;
+// ================ add comment ================
+
+function addComment(container: HTMLElement, input: HTMLTextAreaElement, type: ("comment" | "subComment") = "comment", targetComment?: comment, replyingTo?: string) {
+  const content = input.value.trim();
   const currentUser = currentUserInfo();
   const comments: comments = JSON.parse(localStorage.getItem('comments') || '[]');
+  const creationTime = new createCreationTime();
 
+
+  // Check if the content is empty
   if (!content) {
-    displayAlert('danger', 'Please provide comment content first')
-    return
+    displayAlert('danger', 'Please provide comment content first');
+    return;
   }
-  if (comments.length > 0) {
-    const newCommentId = comments[comments.length - 1].id + 1;
-    const creationTime = new createCreationTime();
-    const newComment = commentObject(newCommentId, content, creationTime.humanDate, 0, currentUser.username);
-    console.log('newComment :', newComment);
+  // for comment (replying)
+  // Generate a new comment ID
+  const newCommentId = comments.length > 0 ? comments[comments.length - 1].id + 1 : 1;
+  // Create a new comment object
+  const newComment = commentObject(newCommentId, content, creationTime.humanDate, 0, currentUser.username);
 
-    // container.innerHTML += createComment(newComment.id, newComment.content, newComment.createdAt, newComment.score, newComment.user.username, '');
+  // Update local storage with the new comment
+  localStorage.setItem('comments', JSON.stringify([...comments, newComment]));
 
-    // Update local storage with the new comment
-    localStorage.setItem('comments', JSON.stringify([...comments, newComment]));
-    const postComments = document.querySelector('.post-comments') as HTMLElement;
-    postComments.innerHTML = '';
-    const localData: DataComments = JSON.parse(localStorage.getItem('data') as string);
-    displayComments(postComments, localData);
-  }
+  // Refresh the comments display
+  refreshComments();
 
+  // Reset the input field
   reset(input);
 }
 
+// ================ delete comment ================
+// Function to create the delete comment dialog
+function createDeleteDialog(): HTMLDialogElement {
+  const dialogElem = document.createElement('dialog');
+  dialogElem.setAttribute('class', 'dialog');
+  dialogElem.innerHTML = `
+    <div autofocus>
+      <p>Are you sure you want to delete this comment? This action cannot be undone.</p>
+    </div>
+    <form method="dialog">
+      <div class="btn_collection"></div>
+      <button class="cancel" type="submit" value="no, cancel">NO, CANCEL</button>
+      <button class="delete" type="submit" value="yes, delete" formmethod="dialog">YES, DELETE</button>
+    </form>
+  `;
 
-const creationTime = new Date().toTimeString();
+  document.body.appendChild(dialogElem);
+  return dialogElem;
+}
+// Function to delete comment from localStorage
+function deleteCommentFromLocalStorage(commentId: string) {
+  const comments: comments = JSON.parse(localStorage.getItem('comments') || '[]');
 
+  const updatedComments = comments.filter((cmnt) => {
+    if (cmnt.id === Number(commentId)) {
+      // Delete the main comment
+      return false;
+    } else if (cmnt.replies) {
+      // Delete a sub-comment
+      cmnt.replies = cmnt.replies.filter((subCmnt) => subCmnt.id !== Number(commentId));
+    }
+    return true;
+  });
+
+  localStorage.setItem('comments', JSON.stringify(updatedComments));
+}
+// Function to handle the delete form submission
+function handleDeleteSubmission(e: SubmitEvent, commentId: string, dialogElem: HTMLDialogElement) {
+  e.preventDefault();
+
+  const target = e.target as HTMLFormElement | null;
+
+  if (!target) return;
+
+  const buttonValue = (e.submitter as HTMLButtonElement)!.value;
+
+  if (buttonValue === 'no, cancel') {
+    // Close the dialog
+    dialogElem.close();
+    // Remove the created dialog after canceling the deletion
+    document.body.removeChild(dialogElem);
+  } else if (buttonValue === 'yes, delete') {
+    console.log('buttonValue :', buttonValue);
+    deleteCommentFromLocalStorage(commentId);
+
+    // Update the DOM
+    refreshComments();
+
+    // Close the dialog
+    dialogElem.close();
+    // Remove the created dialog after completing the deletion
+    document.body.removeChild(dialogElem);
+  }
+}
 // delete comment
-function deleteComment(comment: HTMLElement) {
-  // Implement your logic for deleting a comment from the DOM and local storage
+function deleteComment(id: string) {
+
+  const dialogElem = createDeleteDialog();
+
+  // Show the dialog
+  dialogElem.showModal();
+
+  // Handle form submission
+  const formDeleteComment = dialogElem.querySelector('form');
+  formDeleteComment?.addEventListener('submit', (e) =>
+    handleDeleteSubmission(e, id, dialogElem));
 }
 
 
-// edit comment
-function editComment(comment: HTMLElement) {
-  // Implement your logic for editing a comment in the DOM and local storage
+// ================ edit comment ================
+function editComment(commentId: string) {
+  
+}
+// ================ reply comment ================
+
+// handel replay submit
+function handelReplaySubmit(commentHTML: HTMLElement, editForm: HTMLDivElement) {
+  // Get comment id from dataset
+  const commentId = commentHTML?.dataset?.id as string;
+
+  // Retrieve comments from local storage
+  const comments: comments = JSON.parse(localStorage.getItem('comments') || '[]');
+
+  // Find the target comment to be replied
+  const targetComment = comments.find(cmnt => {
+    if (cmnt.id === Number(commentId) || (cmnt.replies && cmnt.replies.some(subCmnt => subCmnt.id === Number(commentId)))) {
+      return true;
+    }
+    return false;
+  });
+
+  // Get the user to be replied and the comment content
+  let replyingTo = commentHTML?.querySelector('.comment__user--name')?.textContent as string;
+  const replies = targetComment?.replies!;
+  const replyInput = editForm.querySelector('#comment-textarea') as HTMLTextAreaElement;
+
+  // Generate a new sub-comment ID
+  const currentUser = currentUserInfo().username;
+  const creationTime = new createCreationTime().humanDate;
+  const newSubCommentId = replies.length > 0 ? `${targetComment?.id}.${replies.length + 1}` : `${targetComment?.id}.1`;
+  const content = replyInput.value;
+
+  // Create a new sub-comment object
+  const newComment = commentObject(Number(newSubCommentId), content, creationTime, 0, currentUser, true, replyingTo) as never;
+
+  if (targetComment) {
+    targetComment.replies.push(newComment);
+  }
+
+  // Update local storage with the new sub-comment
+  localStorage.setItem('comments', JSON.stringify(comments));
+
+  // Refresh comments in the DOM
+  refreshComments();
+
+  // Reset the reply input
+  reset(replyInput, true);
 }
 
-// reply comment
-function replyComment(comment: HTMLElement) {
-  // Implement your logic for replying to a comment in the DOM and local storage
+function replyComment(commentHTML: HTMLElement) {
+  // Create a reply form
+  const editForm = form('reply');
+  
+  // Check if the form already exists
+  const formExist = commentHTML.nextElementSibling?.classList.contains('comment-form-container') as boolean;
+
+  if (!formExist) {
+    commentHTML.insertAdjacentElement('afterend', editForm);
+  }
+
+  // Add submit event listener to the form
+  editForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    handelReplaySubmit(commentHTML, editForm);
+  });
+
+  // Add keydown event listener to the reply input
+  const replyInput = editForm.querySelector('#comment-textarea') as HTMLTextAreaElement;
+  replyInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handelReplaySubmit(commentHTML, editForm);
+    }
+  });
 }
 
+
+// localStorage.clear();
 // reset
-function reset(input: HTMLTextAreaElement) {
+function reset(input: HTMLTextAreaElement, reply?: boolean) {
   input.value = '';
+  if (reply) {
+    const comments = document.querySelector('.comments');
+    const editForm = comments?.querySelector('.comment-form-container.reply');
+    if (editForm) {
+      comments?.removeChild(editForm);
+    }
+  }
+}
+
+// refresh the comment dom after deleting or editing or replying 
+function refreshComments() {
+  const postComments = document.querySelector('.post-comments') as HTMLElement;
+  postComments.innerHTML = '';
+  const localData: DataComments = JSON.parse(localStorage.getItem('data') as string);
+  displayComments(postComments, localData);
 }
 
 // alert
@@ -329,21 +487,6 @@ function reset(input: HTMLTextAreaElement) {
 function displayAlert(type: string, msg: string) {
 
 }
-
-//  local Storage
-
-// add to local Storage
-
-function addToLocalStorage() {
-
-}
-
-// remove from local Storage 
-
-function removeFromLocalStorage() {
-
-}
-
 
 // ========== add the existing comments to the dom ========
 
@@ -373,16 +516,12 @@ function setDataToLocalStorage(data: DataComments) {
     const value = data[key];
     if (key === "currentUser" && !localStorage.getItem("comments")) {
       localStorage.setItem(`${key}`, JSON.stringify(value))
-    }
-    if (key === "comments" && !localStorage.getItem("comments")) {
+    } else if (key === "comments" && !localStorage.getItem("comments")) {
       localStorage.setItem(`${key}`, JSON.stringify(value))
     }
-    return
   }
 }
-
 // Function to display comments on the web page from the local storage
-
 function displayComments(container: HTMLElement, localData: DataComments) {
 
   const currentUserLocalData: currentUser = JSON.parse(localStorage.getItem("currentUser")!);
@@ -449,46 +588,6 @@ function displayComments(container: HTMLElement, localData: DataComments) {
 
 
 
-function getElapsedTime(creationTime: Date): string {
-  const now = new Date();
-  const timeDifference = now.getTime() - creationTime.getTime();
-  const seconds = Math.floor(timeDifference / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-  const weeks = Math.floor(days / 7);
-  const months = Math.floor(days / 30.44); // Average days in a month
-  const years = Math.floor(days / 365);
-
-  if (seconds < 60) {
-    return 'a moment ago';
-  } else if (minutes === 1) {
-    return '1 minute ago';
-  } else if (minutes < 60) {
-    return `${minutes} minutes ago`;
-  } else if (hours === 1) {
-    return '1 hour ago';
-  } else if (hours < 24) {
-    return `${hours} hours ago`;
-  } else if (days === 1) {
-    return '1 day ago';
-  } else if (days < 7) {
-    return `${days} days ago`;
-  } else if (weeks === 1) {
-    return '1 week ago';
-  } else if (weeks < 4.33) {
-    return `${weeks} weeks ago`;
-  } else if (months === 1) {
-    return '1 month ago';
-  } else if (months < 12) {
-    return `${months} months ago`;
-  } else if (years === 1) {
-    return '1 year ago';
-  } else {
-    return `${years} years ago`;
-  }
-}
-
 
 class createCreationTime {
   _creationTime: Date;
@@ -507,6 +606,7 @@ class createCreationTime {
     const creationTime = new Date(`${year}-${month}-${day}T${hour}:${minute}:${seconds}Z`).toISOString();
     return new Date(creationTime);
   }
+
   getElapsedTime() {
     const now = new Date();
     const timeDifference = now.getTime() - this._creationTime.getTime();
@@ -547,11 +647,9 @@ class createCreationTime {
     }
   }
 
-
   public get humanDate(): string {
     return this.createCreationTime().toISOString()
   }
-
 }
 
 

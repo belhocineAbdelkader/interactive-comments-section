@@ -14,5 +14,4 @@ export default class checkType {
       return { arg, typeofarg: typeof arg, is: false };
     return { arg, typeofarg: typeof arg, is: Boolean(arg) };
   }
-
 }
