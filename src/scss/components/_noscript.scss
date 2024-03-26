@@ -1,0 +1,14 @@
+noscript {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+
+  .no-script-message {
+    border: 3px solid;
+    border-radius: 0.8rem;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}

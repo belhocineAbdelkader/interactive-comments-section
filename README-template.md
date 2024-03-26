@@ -101,17 +101,25 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 - [Clamped font sizes](https://utopia.fyi/) - This is an amazing site which helped me to make responsive font size depending on the screen size.
 
-- [`article` element MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article#usage_notes) - Read This amazing article about `article` element.
+- [**Variable fonts guide MDN**](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide) - Variable fonts are an evolution of the OpenType font specification that enables many different variations of a typeface to be incorporated into a single file.
 
-- [`time` element MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time#datetime) - Read This amazing article about `time` element.
+- [**Font Converter**](https://cloudconvert.com/ttf-to-woff2) - convert fonts.
 
-- [`dialog` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog?retiredLocale=ar) - Read This amazing article about `dialog` element from **MDN**.
+- [`article` **element MDN**](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article#usage_notes) - Read This amazing article about `article` element.
 
-- [can i use `dialog` element](https://caniuse.com/dialog)
+- [`time` **element MDN**](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time#datetime) - Read This amazing article about `time` element.
 
-- [`dialog` element](https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element) - Read This amazing article about `dialog` element.
+- [`dialog` **element**](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog?retiredLocale=ar) - Read This amazing article about `dialog` element from **MDN**.
 
+- [**can i use `dialog` element**](https://caniuse.com/dialog)
 
+- [**`dialog` element**](https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element) - Read This amazing article about `dialog` element.
+
+- **Optimize long tasks** - this is a great articles about how make make user experience more good.
+  - [Article from **MDN**](https://developer.mozilla.org/en-US/docs/Web/API/Scheduler/postTask)
+  - [Article from **web.dev**](https://web.dev/articles/optimize-long-tasks?utm_source=devtools)
+
+- [`scheduler` **polyfill**](https://github.com/GoogleChromeLabs/scheduler-polyfill) - This is a polyfill for the Prioritized Task Scheduling API.
 
 ## Author
 

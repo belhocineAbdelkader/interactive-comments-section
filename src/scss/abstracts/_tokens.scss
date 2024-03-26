@@ -4,11 +4,7 @@ $vars: (
     // typography
     ff:
         (
-            sans-serif: #{Rubik,
-            "Segoe UI",
-            Helvetica,
-            Arial,
-            sans-serif}
+            sans-serif: #{Rubik}
         ),
     fs: (
         200: clamp(0.8784rem, 0.847rem + 0.1568vi, 0.9882rem),

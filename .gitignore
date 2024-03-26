@@ -18,6 +18,9 @@ dist-ssr
 *.xd
 .prettierignore
 
+# folders
+design
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

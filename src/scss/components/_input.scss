@@ -2,6 +2,23 @@
 
 @layer comment {
   .comment-form-container {
+
+    .textarea {
+      padding: 1rem 2rem;
+      border: 1px solid var(--input-border);
+      resize: none;
+      min-width: 100%;
+      min-height: var(--input-min-hight);
+      border-radius: var(--input-radius);
+      &:focus::placeholder {
+        color: transparent;
+        transition: color 0.2s ease-out;
+      }
+      &::placeholder {
+        transition: color 0.2s ease-in;
+      }
+    }
+
     &.send,
     &.reply {
       background-color: var(--form-bg);
@@ -13,6 +30,7 @@
         gap: var(--gap-main);
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, auto);
+        
         label {
           grid-area: 1 / 1 / 2 / 3;
         }
@@ -38,24 +56,48 @@
           }
         }
       }
+    }
 
-      &.update {
+    &.edit {
+      margin: 0;
+      grid-area: 2 / 1 / 2 / 4;
+
+      .comment-form-container__form {
+        display: grid;
+        row-gap: var(--gap-main);
+        grid-template-rows: repeat(2, auto);
+        
+        .textarea{
+          padding: 1rem;
+        }
+
+        label {
+          grid-area: 1 / 1 / 1 / 1;
+        }
+
+        .btn.edit {
+          grid-area: 2 / 2 / 2 / -1;
+          margin-left: auto;
+        }
+      }
+
+      @include mq(md) {
+        grid-area: 2 / 2 / 4 / 5;
+        row-gap: var(--gap-main);
+        .comment-form-container__form {
+          grid-template-columns: auto 1fr auto;
+
+          label {
+            grid-area: 1 / 2 / 2 / 2;
+          }
+
+          .btn.edit {
+            grid-area: 2 / 1 / 2 / -1;
+            margin-left: auto;
+          }
+        }
       }
     }
-    .textarea {
-      padding: 1rem 2rem;
-      border: 1px solid var(--input-border);
-      resize: none;
-      min-width: 100%;
-      min-height: var(--input-min-hight);
-      border-radius: var(--input-radius);
-      &:focus::placeholder {
-        color: transparent;
-        transition: color .2s ease-out;
-      }
-      &::placeholder {
-        transition: color .2s ease-in;
-      }
-    }
+
   }
 }

@@ -4,11 +4,20 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    max-width: 21rem;
     padding: 20px;
     border: 1px solid #ccc;
     z-index: 1000;
+    border-radius: var(--radius-main);
     
-    
+    h2{
+      margin-block-start: .5rem;
+    }
+    .btn_collection{
+      display: flex;
+      justify-content: space-between;
+      margin-block-start: .5rem;
+    }
   }
 
   ::backdrop {
