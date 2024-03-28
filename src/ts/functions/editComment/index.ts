@@ -55,8 +55,9 @@ export default function editComment(commentHTML: HTMLElement) {
   const editForm = form('edit');
   const inputForm = editForm.querySelector('#comment-textarea') as HTMLTextAreaElement;
 
-  // Remove unnecessary elements from the new form
+  // Remove unnecessary elements from the new form and update the text content of th bt
   editForm.firstElementChild?.removeChild(editForm.querySelector('.comment-form-container__form__user-avatar') as HTMLElement);
+  editForm.firstElementChild!.querySelector('span.text')!.textContent = 'UPDATE'
 
   // Extract the user being replied to
   let replyingTo: string;

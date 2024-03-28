@@ -20,7 +20,7 @@ export default function createComment (id: number, content: string, createdAt: s
     </button>
   `;
   const regularUserBtns = `
-  <button type="button" class="btn reply">
+  <button type="button" class="btn reply-comment">
     <span class="btn-wrap">
       <span class="icon icon-reply"></span>
       <span class="btn-text">Reply</span>

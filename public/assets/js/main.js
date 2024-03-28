@@ -55,7 +55,7 @@ window.addEventListener("DOMContentLoaded", function () {
             var commentID = target.closest('article.comment');
             (0, editComment_1.default)(commentID);
         }
-        else if (target === null || target === void 0 ? void 0 : target.classList.contains('reply')) {
+        else if (target === null || target === void 0 ? void 0 : target.classList.contains('reply-comment')) {
             var commentHTML = target.closest('article.comment');
             (0, replyComment_1.default)(commentHTML);
         }

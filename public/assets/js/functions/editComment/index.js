@@ -44,8 +44,9 @@ function editComment(commentHTML) {
     var contentElem = commentHTML.querySelector('.comment__content');
     var editForm = (0, form_1.default)('edit');
     var inputForm = editForm.querySelector('#comment-textarea');
-    // Remove unnecessary elements from the new form
+    // Remove unnecessary elements from the new form and update the text content of th bt
     (_a = editForm.firstElementChild) === null || _a === void 0 ? void 0 : _a.removeChild(editForm.querySelector('.comment-form-container__form__user-avatar'));
+    editForm.firstElementChild.querySelector('span.text').textContent = 'UPDATE';
     // Extract the user being replied to
     var replyingTo;
     if (contentElem) {

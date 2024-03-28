@@ -46,7 +46,7 @@ function addComment(container, input) {
     var newComment = (0, createComment_1.default)(newCommentObject.id, newCommentObject.content, newCommentObject.createdAt, newCommentObject.score, newCommentObject.user.username, true);
     // update ui
     var commentsSection = container.querySelector('section.comments');
-    scheduler.postTask(function () { return commentsSection === null || commentsSection === void 0 ? void 0 : commentsSection.insertAdjacentElement("beforeend", JSON.parse(dompurify_1.default.sanitize(newComment))); }, { priority: 'user-blocking' });
+    scheduler.postTask(function () { return commentsSection === null || commentsSection === void 0 ? void 0 : commentsSection.insertAdjacentHTML("beforeend", dompurify_1.default.sanitize(newComment)); }, { priority: 'user-blocking' });
     // Reset the input field
     scheduler.postTask(function () { return (0, reset_1.default)(input); }, { priority: 'user-blocking' });
     // Update local storage with the new comment

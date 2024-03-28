@@ -16,10 +16,12 @@
         background-color: var(--icon-bg);
 
         &.icon-reply {
+            --icon-bg: var(--bg-interactive-primary);
             -webkit-mask-image: url('../images/icon-reply.svg');
             mask-image: url('../images/icon-reply.svg');
         }
         &.icon-edit {
+            --icon-bg: var(--bg-interactive-primary);
             -webkit-mask-image: url('../images/icon-edit.svg');
             mask-image: url('../images/icon-edit.svg');
         }

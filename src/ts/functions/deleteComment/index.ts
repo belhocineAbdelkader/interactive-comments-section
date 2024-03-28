@@ -11,8 +11,20 @@ function createDeleteDialog(): HTMLDialogElement {
     </div>
     <form method="dialog">
       <div class="btn_collection">
-        <button class="cancel" type="submit" value="no, cancel">NO, CANCEL</button>
-        <button class="delete" type="submit" value="yes, delete" formmethod="dialog">YES, DELETE</button>
+        <button class="btn btn-dialog cancel" type="submit" value="no, cancel">
+          <span class="btn-wrap">
+            <span class="text capitalize">
+              NO, CANCEL
+            </span>
+          </span>
+        </button>
+        <button class="btn btn-dialog delete" type="submit" value="yes, delete" formmethod="dialog">
+          <span class="btn-wrap">
+            <span class="text capitalize">
+              YES, DELETE
+            </span>
+          </span>
+        </button>
       </div>
     </form>
   `;

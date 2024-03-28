@@ -46,7 +46,7 @@ export default function addComment(container: HTMLElement, input: HTMLTextAreaEl
 
   // update ui
   const commentsSection = container.querySelector('section.comments') as HTMLElement;
-  scheduler.postTask(() => commentsSection?.insertAdjacentElement("beforeend", JSON.parse(DOMPurify.sanitize(newComment))), { priority: 'user-blocking' });
+  scheduler.postTask(() => commentsSection?.insertAdjacentHTML("beforeend", DOMPurify.sanitize(newComment)), { priority: 'user-blocking' });
   // Reset the input field
   scheduler.postTask(() => reset(input), { priority: 'user-blocking' });
   // Update local storage with the new comment

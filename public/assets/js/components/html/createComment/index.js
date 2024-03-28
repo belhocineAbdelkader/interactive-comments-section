@@ -5,7 +5,7 @@ var createCreationTime_1 = require("../../../classes/createCreationTime");
 function createComment(id, content, createdAt, score, user, isCurrentUser, isReplyTo) {
     if (isCurrentUser === void 0) { isCurrentUser = false; }
     var CurrentUserBtns = "\n    <button type=\"button\" class=\"btn delete\">\n        <span class=\"btn-wrap\">\n          <span class=\"icon icon-delete\"></span>\n          <span class=\"btn-text\">Delete</span>\n          <span class=\"only-sr\">delete comment</span>\n        </span>\n      </button>\n      <button type=\"button\" class=\"btn edit\">\n        <span class=\"btn-wrap\">\n          <span class=\"icon icon-edit\"></span>\n          <span class=\"btn-text\">Edit</span>\n          <span class=\"only-sr\">edit comment</span>\n        </span>\n    </button>\n  ";
-    var regularUserBtns = "\n  <button type=\"button\" class=\"btn reply\">\n    <span class=\"btn-wrap\">\n      <span class=\"icon icon-reply\"></span>\n      <span class=\"btn-text\">Reply</span>\n      <span class=\"only-sr\">reply to comment</span>\n    </span>\n  </button>\n\n  ";
+    var regularUserBtns = "\n  <button type=\"button\" class=\"btn reply-comment\">\n    <span class=\"btn-wrap\">\n      <span class=\"icon icon-reply\"></span>\n      <span class=\"btn-text\">Reply</span>\n      <span class=\"only-sr\">reply to comment</span>\n    </span>\n  </button>\n\n  ";
     // dealing with Elapsed Time
     var regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
     var validDate = regex.test(createdAt);

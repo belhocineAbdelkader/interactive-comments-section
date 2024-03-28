@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+design/*
 dist
 dist-ssr
 *.local
@@ -18,10 +19,8 @@ dist-ssr
 *.xd
 .prettierignore
 
-# folders
-design
-
 # Editor directories and files
+.vscode
 .vscode/*
 !.vscode/extensions.json
 .idea

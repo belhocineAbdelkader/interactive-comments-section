@@ -22,20 +22,21 @@ function updateReplyUI(commentHTML, newComment) {
     var subCmnt = (0, createComment_1.default)(newComment.id, newComment.content, newComment.createdAt, newComment.score, newComment.user.username, true, newComment.replyingTo);
     if (commentHTML.closest('.comments__sub-comments')) {
         var commentsSection = commentHTML.closest('.comments__sub-comments');
-        commentsSection === null || commentsSection === void 0 ? void 0 : commentsSection.insertAdjacentElement('beforeend', JSON.parse(dompurify_1.default.sanitize(subCmnt)));
+        commentsSection === null || commentsSection === void 0 ? void 0 : commentsSection.insertAdjacentHTML('beforeend', dompurify_1.default.sanitize(subCmnt));
     }
     else {
         var subCommentsSection = document.createElement('section');
         subCommentsSection.classList.add('comments__sub-comments');
         fragmentSubComments.appendChild(subCmnt);
         subCommentsSection.appendChild(fragmentSubComments);
-        commentHTML.insertAdjacentElement('beforeend', JSON.parse(dompurify_1.default.sanitize(subCommentsSection)));
+        commentHTML.insertAdjacentElement('beforeend', subCommentsSection);
     }
 }
 // handel replay submit
 function handelReplaySubmit(commentHTML, editForm) {
     var _a, _b;
     var commentId = (_a = commentHTML === null || commentHTML === void 0 ? void 0 : commentHTML.dataset) === null || _a === void 0 ? void 0 : _a.id;
+    console.log('commentId :', commentId);
     if (!commentId)
         return;
     var comments = JSON.parse(localStorage.getItem('comments') || '[]');
@@ -72,19 +73,21 @@ function handelReplaySubmit(commentHTML, editForm) {
 function replyComment(commentHTML) {
     var _a;
     // Create a reply form
-    var replyForm = (0, form_1.default)('reply');
+    var replyFormContainer = (0, form_1.default)('reply');
+    var replyForm = replyFormContainer.querySelector('form');
     // Check if the form already exists
     var formExist = (_a = commentHTML.nextElementSibling) === null || _a === void 0 ? void 0 : _a.classList.contains('comment-form-container');
     if (!formExist) {
-        commentHTML.insertAdjacentElement('afterend', JSON.parse(dompurify_1.default.sanitize(replyForm)));
+        commentHTML.insertAdjacentElement('afterend', replyFormContainer);
+        // !!! commentHTML.insertAdjacentElement('afterend', DOMPurify.sanitize(replyFormContainer));
     }
     // Add submit event listener to the form
-    replyForm.addEventListener('submit', function (e) {
+    replyForm === null || replyForm === void 0 ? void 0 : replyForm.addEventListener('submit', function (e) {
         e.preventDefault();
         handelReplaySubmit(commentHTML, replyForm);
     });
     // Add keydown event listener to the reply input
-    var replyInput = replyForm.querySelector('#comment-textarea');
+    var replyInput = replyForm === null || replyForm === void 0 ? void 0 : replyForm.querySelector('#comment-textarea');
     replyInput === null || replyInput === void 0 ? void 0 : replyInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();

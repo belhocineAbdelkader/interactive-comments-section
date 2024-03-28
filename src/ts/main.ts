@@ -67,10 +67,10 @@ window.addEventListener("DOMContentLoaded", () => {
       const commentID = target.closest('article.comment') as HTMLElement
       editComment(commentID);
 
-    } else if (target?.classList.contains('reply')) {
-
+    } else if (target?.classList.contains('reply-comment')) {
       const commentHTML = (target.closest('article.comment') as HTMLElement)!;
       replyComment(commentHTML);
+
     } else if (target?.classList.contains('vote')) {
       commentVote(target);
     }
@@ -195,3 +195,5 @@ function insertPassedTime() {
     }
   });
 }
+
+

@@ -3,28 +3,10 @@
 import { defineConfig } from "vite";
 import path from "node:path";
 
-// import image optimization  modules
-import imagemin from "imagemin";
-import imageminWebp from "imagemin-webp";
-
-// Specify the input and output directories for image optimization
-const inputDir = "./src/assets/img";
-const outputDir = "./dist/assets/img";
-
 // Vite configuration object
 export default defineConfig({
     // Build configuration
     build: {
-        plugins: [
-            imagemin([`${inputDir}/*.{jpg,png}`], {
-                destination: outputDir,
-                plugins: [
-                    imageminWebp({
-                        quality: 80,
-                    }),
-                ],
-            }),
-        ],
 
         // Asset output directory and minification options
         assetsDir: "assets",

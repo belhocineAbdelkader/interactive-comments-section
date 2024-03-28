@@ -21,7 +21,7 @@
 
         /* span inside the btn that will hold icon or icon and text */
         .btn-wrap {
-            --btn-gap: .3rem;
+            --btn-gap: 0.3rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -31,32 +31,99 @@
         }
 
         &.btn-primary {
-            background-color: var(--btn-clr-primary-bg);
-            color: var(--btn-clr-text);
-            padding: var(--btn-padding);
-            text-transform: uppercase;
-            letter-spacing: var(--btn-letter-spacing);
-            font-size: large;
-            font-weight: var(--fw-600);
-            transition: background-color var(--transition-1) linear;
-            &:hover{
-                background-color: var(--btn-clr-primary-bg-hover);
+            margin-bottom: auto;
+            width: 7.125rem;
+            .btn-wrap {
+                background-color: var(--btn-primary-bg);
+                color: var(--btn-primary-text);
+                padding: 0.5rem 2rem;
+                border-radius: var(--radius-200);
+                transition: background-color .2s linear;
+                
+                &:hover {
+                    background-color: var(--btn-primary-bg-hover);
+                    border-radius: var(--radius-200);
+                }
             }
+        }
+
+        &.reply:not(.btn-primary), &.edit:not(.btn-primary){
+            .btn-wrap {
+                color: var(--btn-reply-text);
+                transition: color .1s ;
+            
+                &:hover {
+                    color: var(--btn-reply-text-hover);
+
+                    .icon-reply, .icon-edit {
+                        --icon-bg: var(--btn-reply-text-hover);
+                    }
+                }
+            }
+        }
+
+        &.delete{
+            .btn-wrap {
+                color: var(--btn-delete-text);
+                transition: color .1s ;
+            
+                &:hover {
+                    color: var(--btn-delete-text-hover);
+
+                    .icon-delete{
+                        --icon-bg: var(--btn-delete-text-hover);
+                    }
+                }
+            }
+        }
+
+        &.vote{
+            .btn-wrap {
+                transition: background-color .2s linear;
+
+                &:hover {
+                    .icon-plus, .icon-minus{
+                        --icon-bg: var(--bg-interactive-primary);
+                    }
+                }
+            }
+        }
+
+        &.btn-dialog{
+            width: 12.813rem;
+            .btn-wrap {
+                padding: 0.5rem 1rem;
+                border-radius: var(--radius-200);
+                color: var(--btn-primary-text);
+                transition: background-color .2s linear;
+            }
+
+            &.delete{
+                .btn-wrap {
+                    color: var(--btn-primary-text);
+                    background-color: var(--btn-delete-text);
+                    color: var(--btn-primary-text);                    
+                    &:hover {
+                        background-color: var(--btn-delete-text-hover);
+                    }
+                }
+            }
+
+            &.cancel{
+                .btn-wrap {
+                    background-color: var(--clr-blue-800);
+                    color: var(--btn-primary-text);
+                }
+            }
+
         }
     }
 
     /* Button States */
 
-    .btn:hover,
-    .btn.hover {
+    .btn:focus {
         .btn-wrap {
-            background-color: var(--btn-bg-hover, var(--btn-bg));
-        }
-    }
-
-    .btn:focus{
-        .btn-wrap {
-            border: 1px solid var(--btn-secondary-border-focus);
+            border: 2px solid var(--btn-secondary-border-focus);
             box-shadow: var(--btn-focus-effect);
         }
     }

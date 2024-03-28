@@ -2,19 +2,21 @@
 @layer my-fonts {
   @font-face {
     font-family: "Rubik";
+    font-display: swap;
+    font-optical-sizing: auto;
+    font-weight: 300 900;
+    font-style: normal;
     src: local("Rubik");
     src: url("/assets/fonts/Rubik-VariableFont_wght.woff2") format("woff2-variations");
     src: url("/assets/fonts/Rubik-VariableFont_wght.woff2") format("woff2") tech("variations");
     src: url("/assets/fonts/Rubik-VariableFont_wght.woff") format("woff-variations");
     src: url("/assets/fonts/Rubik-VariableFont_wght.woff") format("woff") tech("variations");
-    font-display: swap;
-    font-weight: 1 1000;
   }
 }
 @layer setup {
   @layer root {
     :root {
-      --ff-sans-serif: Rubik;
+      --ff-sans-serif: Rubik, Segoe UI, Helvetica, Arial, sans-serif;
       --fs-200: clamp(0.8784rem, 0.847rem + 0.1568vi, 0.9882rem);
       --fs-300: clamp(0.9372rem, 0.9037rem + 0.1674vi, 1.0544rem);
       --fs-400: clamp(1rem, 0.9643rem + 0.1786vi, 1.125rem);
@@ -306,55 +308,6 @@
   }
 }
 @layer my-components {
-  @layer button {
-    button,
-    .btn {
-      appearance: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-    .btn {
-      border-radius: var(--btn-border-radius);
-      cursor: pointer;
-      display: inline-block;
-      text-align: center;
-      text-decoration: none;
-      color: inherit;
-      /* span inside the btn that will hold icon or icon and text */
-    }
-    .btn .btn-wrap {
-      --btn-gap: .3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--btn-gap);
-      background-color: transparent;
-      position: relative;
-    }
-    .btn.btn-primary {
-      background-color: var(--btn-clr-primary-bg);
-      color: var(--btn-clr-text);
-      padding: var(--btn-padding);
-      text-transform: uppercase;
-      letter-spacing: var(--btn-letter-spacing);
-      font-size: large;
-      font-weight: var(--fw-600);
-      transition: background-color var(--transition-1) linear;
-    }
-    .btn.btn-primary:hover {
-      background-color: var(--btn-clr-primary-bg-hover);
-    }
-    /* Button States */
-    .btn:hover .btn-wrap,
-    .btn.hover .btn-wrap {
-      background-color: var(--btn-bg-hover, var(--btn-bg));
-    }
-    .btn:focus .btn-wrap {
-      border: 1px solid var(--btn-secondary-border-focus);
-      box-shadow: var(--btn-focus-effect);
-    }
-  }
   @layer icons {
     .icon {
       --size: var(--icon-size, 1rem);
@@ -373,10 +326,12 @@
       background-color: var(--icon-bg);
     }
     .icon.icon-reply {
+      --icon-bg: var(--bg-interactive-primary);
       -webkit-mask-image: url("../images/icon-reply.svg");
       mask-image: url("../images/icon-reply.svg");
     }
     .icon.icon-edit {
+      --icon-bg: var(--bg-interactive-primary);
       -webkit-mask-image: url("../images/icon-edit.svg");
       mask-image: url("../images/icon-edit.svg");
     }
@@ -396,10 +351,101 @@
       mask-image: url("../images/icon-plus.svg");
     }
   }
-  @layer comment {
-    .comment {
-      transition: all 0.5s linear;
+  @layer button {
+    button,
+    .btn {
+      appearance: none;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
+    .btn {
+      border-radius: var(--btn-border-radius);
+      cursor: pointer;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      /* span inside the btn that will hold icon or icon and text */
+    }
+    .btn .btn-wrap {
+      --btn-gap: 0.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--btn-gap);
+      background-color: transparent;
+      position: relative;
+    }
+    .btn.btn-primary {
+      margin-bottom: auto;
+      width: 7.125rem;
+    }
+    .btn.btn-primary .btn-wrap {
+      background-color: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      padding: 0.5rem 2rem;
+      border-radius: var(--radius-200);
+      transition: background-color 0.2s linear;
+    }
+    .btn.btn-primary .btn-wrap:hover {
+      background-color: var(--btn-primary-bg-hover);
+      border-radius: var(--radius-200);
+    }
+    .btn.reply:not(.btn-primary) .btn-wrap, .btn.edit:not(.btn-primary) .btn-wrap {
+      color: var(--btn-reply-text);
+      transition: color 0.1s;
+    }
+    .btn.reply:not(.btn-primary) .btn-wrap:hover, .btn.edit:not(.btn-primary) .btn-wrap:hover {
+      color: var(--btn-reply-text-hover);
+    }
+    .btn.reply:not(.btn-primary) .btn-wrap:hover .icon-reply, .btn.reply:not(.btn-primary) .btn-wrap:hover .icon-edit, .btn.edit:not(.btn-primary) .btn-wrap:hover .icon-reply, .btn.edit:not(.btn-primary) .btn-wrap:hover .icon-edit {
+      --icon-bg: var(--btn-reply-text-hover);
+    }
+    .btn.delete .btn-wrap {
+      color: var(--btn-delete-text);
+      transition: color 0.1s;
+    }
+    .btn.delete .btn-wrap:hover {
+      color: var(--btn-delete-text-hover);
+    }
+    .btn.delete .btn-wrap:hover .icon-delete {
+      --icon-bg: var(--btn-delete-text-hover);
+    }
+    .btn.vote .btn-wrap {
+      transition: background-color 0.2s linear;
+    }
+    .btn.vote .btn-wrap:hover .icon-plus, .btn.vote .btn-wrap:hover .icon-minus {
+      --icon-bg: var(--bg-interactive-primary);
+    }
+    .btn.btn-dialog {
+      width: 12.813rem;
+    }
+    .btn.btn-dialog .btn-wrap {
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-200);
+      color: var(--btn-primary-text);
+      transition: background-color 0.2s linear;
+    }
+    .btn.btn-dialog.delete .btn-wrap {
+      color: var(--btn-primary-text);
+      background-color: var(--btn-delete-text);
+      color: var(--btn-primary-text);
+    }
+    .btn.btn-dialog.delete .btn-wrap:hover {
+      background-color: var(--btn-delete-text-hover);
+    }
+    .btn.btn-dialog.cancel .btn-wrap {
+      background-color: var(--clr-blue-800);
+      color: var(--btn-primary-text);
+    }
+    /* Button States */
+    .btn:focus .btn-wrap {
+      border: 2px solid var(--btn-secondary-border-focus);
+      box-shadow: var(--btn-focus-effect);
+    }
+  }
+  @layer comment {
     .comment__wrapper {
       background-color: var(--comment-bg);
       border-radius: var(--comment-radius);
@@ -454,6 +500,7 @@
     }
     @media screen and (min-width: 48em) {
       .comment__counter-btns {
+        width: 3.25rem;
         grid-area: 1/1/4/1;
         flex-direction: column;
         height: fit-content;
@@ -476,7 +523,7 @@
         height: fit-content;
       }
     }
-    .comment.current-user .You {
+    .comment .current-user .you {
       background-color: var(--bg-interactive-primary);
       color: var(--bg-default-secondary);
       padding: 0.1rem 0.6rem;
@@ -576,17 +623,17 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      max-width: 21rem;
       padding: 20px;
       border: 1px solid #ccc;
       z-index: 1000;
-      border-radius: var(--radius-main);
+      border-radius: var(--radius-100);
     }
     .dialog h2 {
       margin-block-start: 0.5rem;
     }
     .dialog .btn_collection {
       display: flex;
+      gap: 1rem;
       justify-content: space-between;
       margin-block-start: 0.5rem;
     }

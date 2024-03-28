@@ -28,19 +28,20 @@ function updateReplyUI(commentHTML: HTMLElement, newComment: subComment) {
 
   if (commentHTML.closest('.comments__sub-comments')) {
     const commentsSection = commentHTML.closest('.comments__sub-comments');
-    commentsSection?.insertAdjacentElement('beforeend', JSON.parse(DOMPurify.sanitize(subCmnt)));
+    commentsSection?.insertAdjacentHTML('beforeend', DOMPurify.sanitize(subCmnt));
 
   } else {
     const subCommentsSection = document.createElement('section');
     subCommentsSection.classList.add('comments__sub-comments');
     fragmentSubComments.appendChild(subCmnt);
     subCommentsSection.appendChild(fragmentSubComments);
-    commentHTML.insertAdjacentElement('beforeend', JSON.parse(DOMPurify.sanitize(subCommentsSection)));
+    commentHTML.insertAdjacentElement('beforeend', subCommentsSection);
   }
 }
 // handel replay submit
-function handelReplaySubmit(commentHTML: HTMLElement, editForm: HTMLDivElement) {
+function handelReplaySubmit(commentHTML: HTMLElement, editForm: HTMLFormElement) {
   const commentId = commentHTML?.dataset?.id;
+  console.log('commentId :', commentId);
   if (!commentId) return;
 
 
@@ -88,27 +89,30 @@ function handelReplaySubmit(commentHTML: HTMLElement, editForm: HTMLDivElement) 
 
 export default function replyComment(commentHTML: HTMLElement) {
   // Create a reply form
-  const replyForm = form('reply');
+  const replyFormContainer = form('reply');
+  const replyForm = replyFormContainer.querySelector('form');
 
   // Check if the form already exists
   const formExist = commentHTML.nextElementSibling?.classList.contains('comment-form-container') as boolean;
 
   if (!formExist) {
-    commentHTML.insertAdjacentElement('afterend', JSON.parse(DOMPurify.sanitize(replyForm)));
+    commentHTML.insertAdjacentElement('afterend', replyFormContainer);
+    // !!! commentHTML.insertAdjacentElement('afterend', DOMPurify.sanitize(replyFormContainer));
+
   }
 
   // Add submit event listener to the form
-  replyForm.addEventListener('submit', (e) => {
+  replyForm?.addEventListener('submit', (e) => {
     e.preventDefault();
-    handelReplaySubmit(commentHTML, replyForm);
+    handelReplaySubmit(commentHTML, replyForm!);
   });
 
   // Add keydown event listener to the reply input
-  const replyInput = replyForm.querySelector('#comment-textarea') as HTMLTextAreaElement;
+  const replyInput = replyForm?.querySelector('#comment-textarea') as HTMLTextAreaElement;
   replyInput?.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      handelReplaySubmit(commentHTML, replyForm);
+      handelReplaySubmit(commentHTML, replyForm!);
     }
   });
 }

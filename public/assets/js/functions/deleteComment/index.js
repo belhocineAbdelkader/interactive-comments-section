@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function createDeleteDialog() {
     var dialogElem = document.createElement('dialog');
     dialogElem.setAttribute('class', 'dialog');
-    dialogElem.innerHTML = "\n    <h2>Delete comment</h2>\n    <div autofocus>\n      <p>Are you sure you want to delete this comment? This will remove the comment and can't be undone.</p>\n    </div>\n    <form method=\"dialog\">\n      <div class=\"btn_collection\">\n        <button class=\"cancel\" type=\"submit\" value=\"no, cancel\">NO, CANCEL</button>\n        <button class=\"delete\" type=\"submit\" value=\"yes, delete\" formmethod=\"dialog\">YES, DELETE</button>\n      </div>\n    </form>\n  ";
+    dialogElem.innerHTML = "\n    <h2>Delete comment</h2>\n    <div autofocus>\n      <p>Are you sure you want to delete this comment? This will remove the comment and can't be undone.</p>\n    </div>\n    <form method=\"dialog\">\n      <div class=\"btn_collection\">\n        <button class=\"btn btn-dialog cancel\" type=\"submit\" value=\"no, cancel\">\n          <span class=\"btn-wrap\">\n            <span class=\"text capitalize\">\n              NO, CANCEL\n            </span>\n          </span>\n        </button>\n        <button class=\"btn btn-dialog delete\" type=\"submit\" value=\"yes, delete\" formmethod=\"dialog\">\n          <span class=\"btn-wrap\">\n            <span class=\"text capitalize\">\n              YES, DELETE\n            </span>\n          </span>\n        </button>\n      </div>\n    </form>\n  ";
     document.body.appendChild(dialogElem);
     return dialogElem;
 }

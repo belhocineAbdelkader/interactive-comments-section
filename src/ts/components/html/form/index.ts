@@ -9,7 +9,7 @@ export default function form  (type: string)  {
           <span class="only-sr">your comment here</span>
           <textarea class="textarea" name="comment-input" id="comment-textarea" placeholder="Add a comment"></textarea>
         </label>
-        <button class="btn ${type}" type="submit">
+        <button class="btn btn-primary ${type}" id="${type}" type="submit">
           <span class="btn-wrap">
             <span class="text capitalize">
               ${type}
