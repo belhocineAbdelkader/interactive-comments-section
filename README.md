@@ -1,35 +1,33 @@
-# Frontend Mentor - Interactive comments section
+# Frontend Mentor - Interactive comments section solution
 
-![Design preview for the Interactive comments section coding challenge](./design/desktop-preview.jpg)
+This is a solution to the [Interactive comments section challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9).
 
-## Welcome! 👋
+## Table of contents
 
-Thanks for checking out this front-end coding challenge.
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
+## Overview
 
-**To do this challenge, you need a strong understanding of HTML, CSS and JavaScript.**
+### The challenge
 
-## The challenge
-
-Your challenge is to build out this interactive comments section and get it looking as close to the design as possible.
-
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
-
-We provide the data in a local `data.json` file, so use that to populate the content on the first load. If you want to take it up a notch, feel free to build this as a full-stack CRUD application!
-
-Your users should be able to:
+Users should be able to:
 
 - View the optimal layout for the app depending on their device's screen size
 - See hover states for all interactive elements on the page
 - Create, Read, Update, and Delete comments and replies
 - Upvote and downvote comments
-- **Bonus**: If you're building a purely front-end project, use `localStorage` to save the current state in the browser that persists when the browser is refreshed.
-- **Bonus**: Instead of using the `createdAt` strings from the `data.json` file, try using timestamps and dynamically track the time since the comment or reply was posted.
+- when the user click on name on a sub comment the screen will scroll smoothly and take him to the replied comment
+- **Bonus**: I use `localStorage` to save the current state in the browser that persists when the browser is refreshed.
+- **Bonus**: Instead of using the `createdAt` strings from the `data.json` file, i use timestamps and dynamically track the time since the comment or reply was posted.
 
-Want some support on the challenge? [Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
-
-### Expected behaviour
+#### Expected behaviour
 
 - First-level comments should be ordered by their score, whereas nested replies are ordered by time added.
 - Replying to a comment adds the new reply to the bottom of the nested replies within that comment.
@@ -37,70 +35,62 @@ Want some support on the challenge? [Join our community](https://www.frontendmen
 - Adding a new comment or reply uses the `currentUser` object from within the `data.json` file.
 - You can only edit or delete your own comments and replies.
 
-## Where to find everything
+### Screenshot
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design. 
+#### Desktop
 
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. 
+![Desktop](./screenshot/desktop.png)
 
-If you would like the design files (we provide Sketch & Figma versions) to inspect the design in more detail, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+#### Mobile
 
-You will find all the required assets in the `/images` folder. The assets are already optimized.
+![Mobile](./screenshot/mobile.png)
 
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
+### Links
 
-## Building your project
+- Solution URL: [Github](https://github.com/belhocineAbdelkader/interactive-comments-section)
+- **Live Site URL:** [interactive-comments-section](https://interactive-comments-section-kappa-six.vercel.app/)
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+## My process
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+### Built with
 
-## Deploying your project
+- Semantic HTML5 markup
+- Flexbox
+- CSS Grid
+- Typescript
+- Javascript
+- Sass
 
-As mentioned above, there are many ways to host your project for free. Our recommended hosts are:
+### Useful resources
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+- [**OKLCH Color Picker & Converter**](https://oklch.com/#84.86,0.083,15.65,100) - Color picker and converter for OKLCH and LCH color space.
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://medium.com/frontend-mentor/frontend-mentor-trusted-hosting-providers-bf000dfebe).
+- [**Clamped font sizes**](https://utopia.fyi/) - This is an amazing site which helped me to make responsive font size depending on the screen size.
 
-## Create a custom `README.md`
+- [**Variable fonts guide MDN**](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide) - Variable fonts are an evolution of the OpenType font specification that enables many different variations of a typeface to be incorporated into a single file.
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+- [**Font Converter**](https://cloudconvert.com/ttf-to-woff2) - convert fonts.
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
+- [`article` **element MDN**](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article#usage_notes) - Read This amazing article about `article` element.
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+- [`time` **element MDN**](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time#datetime) - Read This amazing article about `time` element.
 
-## Submitting your solution
+- [`dialog` **element**](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog?retiredLocale=ar) - Read This amazing article about `dialog` element from **MDN**.
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://medium.com/frontend-mentor/a-complete-guide-to-submitting-solutions-on-frontend-mentor-ac6384162248) for tips on how to do this.
+- [**can i use `dialog` element**](https://caniuse.com/dialog)
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+- [**`dialog` element**](https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element) - Read This amazing article about `dialog` element.
 
-## Sharing your solution
+- **Optimize long tasks** - this is a great articles about how make make user experience more good.
+  - [Article from **MDN**](https://developer.mozilla.org/en-US/docs/Web/API/Scheduler/postTask)
+  - [Article from **web.dev**](https://web.dev/articles/optimize-long-tasks?utm_source=devtools)
 
-There are multiple places you can share your solution:
+- [`scheduler` **polyfill**](https://github.com/GoogleChromeLabs/scheduler-polyfill) - This is a polyfill for the Prioritized Task Scheduling API.
 
-1. Share your solution page in the **#finished-projects** channel of the [community](https://www.frontendmentor.io/community). 
-2. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on other social channels like LinkedIn.
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
+## Author
 
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
-
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
-
-## Got feedback for us?
-
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
-
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
-
-**Have fun building!** 🚀
+- Website - [Belhocine Abdelkader](https://github.com/belhocineAbdelkader)
+- Frontend Mentor - [@belhocineAbdelkader](https://www.frontendmentor.io/profile/belhocineAbdelkader)
+- Twitter - [@BelhocineAek](https://twitter.com/BelhocineAek)
+- linkedin - [@belhocine-abdelkader](https://www.linkedin.com/in/belhocine-abdelkader-238653263/)
+- Facebook - [@belhocine-abdelkader](https://www.linkedin.com/in/belhocine-abdelkader-238653263/)
