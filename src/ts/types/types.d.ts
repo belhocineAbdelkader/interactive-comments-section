@@ -42,6 +42,7 @@ declare type subComment = {
   createdAt: string,
   score: number,
   replyingTo: string,
+  replyingToId: number | string,
   user: {
     image: {
       png: string,

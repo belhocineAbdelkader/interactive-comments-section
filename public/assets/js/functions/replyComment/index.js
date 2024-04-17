@@ -19,7 +19,7 @@ var reset_1 = require("../helpers/reset");
 // Update UI after reply submission
 function updateReplyUI(commentHTML, newComment) {
     var fragmentSubComments = document.createDocumentFragment();
-    var subCmnt = (0, createComment_1.default)(newComment.id, newComment.content, newComment.createdAt, newComment.score, newComment.user.username, true, newComment.replyingTo);
+    var subCmnt = (0, createComment_1.default)(newComment.id, newComment.content, newComment.createdAt, newComment.score, newComment.user.username, true, newComment.replyingTo, "".concat(newComment.replyingToId));
     if (commentHTML.closest('.comments__sub-comments')) {
         var commentsSection = commentHTML.closest('.comments__sub-comments');
         commentsSection === null || commentsSection === void 0 ? void 0 : commentsSection.insertAdjacentHTML('beforeend', dompurify_1.default.sanitize(subCmnt));
@@ -45,6 +45,7 @@ function handelReplaySubmit(commentHTML, editForm) {
     });
     // Get the user to be replied and the comment content
     var replyingTo = ((_b = commentHTML === null || commentHTML === void 0 ? void 0 : commentHTML.querySelector('.comment__user--name')) === null || _b === void 0 ? void 0 : _b.textContent) || '';
+    var replyingToId = (commentHTML === null || commentHTML === void 0 ? void 0 : commentHTML.dataset.id) || '';
     var replyInput = editForm.querySelector('#comment-textarea');
     if (!replyInput || !targetComment)
         return;
@@ -59,7 +60,7 @@ function handelReplaySubmit(commentHTML, editForm) {
         return;
     }
     // Create a new sub-comment object
-    var newComment = (0, commentObject_1.default)(Number(newSubCommentId), content, creationTime, 0, currentUser, true, replyingTo);
+    var newComment = (0, commentObject_1.default)(Number(newSubCommentId), content, creationTime, 0, currentUser, true, replyingTo, replyingToId);
     if (targetComment) {
         targetComment.replies.push(newComment);
     }

@@ -35,8 +35,9 @@
           grid-area: 1 / 1 / 2 / 3;
         }
 
-        .btn.send {
+        .btn.send, .btn.reply {
           grid-area: 2 / 2 / 2 / -1;
+          margin-inline-start: auto;
         }
         &__user-avatar {
           grid-area: 2 / 1 / 2 / 1;

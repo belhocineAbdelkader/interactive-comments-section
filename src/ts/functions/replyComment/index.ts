@@ -18,13 +18,12 @@ import form from "../../components/html/form";
 // reset
 import reset from "../helpers/reset"
 
-
 // *================ reply comment ================
 // update ui for reply
 // Update UI after reply submission
 function updateReplyUI(commentHTML: HTMLElement, newComment: subComment) {
   const fragmentSubComments = document.createDocumentFragment();
-  const subCmnt = createComment(newComment.id, newComment.content, newComment.createdAt, newComment.score, newComment.user.username, true, newComment.replyingTo);
+  const subCmnt = createComment(newComment.id, newComment.content, newComment.createdAt, newComment.score, newComment.user.username, true, newComment.replyingTo, `${newComment.replyingToId}`);
 
   if (commentHTML.closest('.comments__sub-comments')) {
     const commentsSection = commentHTML.closest('.comments__sub-comments');
@@ -52,6 +51,7 @@ function handelReplaySubmit(commentHTML: HTMLElement, editForm: HTMLFormElement)
 
   // Get the user to be replied and the comment content
   const replyingTo = commentHTML?.querySelector('.comment__user--name')?.textContent || '';
+  const replyingToId = commentHTML?.dataset.id || '' ;
   const replyInput = editForm.querySelector('#comment-textarea') as HTMLTextAreaElement;
 
   if (!replyInput || !targetComment) return;
@@ -70,7 +70,7 @@ function handelReplaySubmit(commentHTML: HTMLElement, editForm: HTMLFormElement)
   }
 
   // Create a new sub-comment object
-  const newComment = commentObject(Number(newSubCommentId), content, creationTime, 0, currentUser, true, replyingTo) as subComment;
+  const newComment = commentObject(Number(newSubCommentId), content, creationTime, 0, currentUser, true, replyingTo, replyingToId) as subComment;
 
   if (targetComment) {
     targetComment.replies.push(newComment as never);

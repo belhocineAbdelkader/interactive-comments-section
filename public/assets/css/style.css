@@ -392,14 +392,14 @@
       background-color: var(--btn-primary-bg-hover);
       border-radius: var(--radius-200);
     }
-    .btn.reply:not(.btn-primary) .btn-wrap, .btn.edit:not(.btn-primary) .btn-wrap {
+    .btn.reply-comment:not(.btn-primary) .btn-wrap, .btn.edit:not(.btn-primary) .btn-wrap {
       color: var(--btn-reply-text);
       transition: color 0.1s;
     }
-    .btn.reply:not(.btn-primary) .btn-wrap:hover, .btn.edit:not(.btn-primary) .btn-wrap:hover {
+    .btn.reply-comment:not(.btn-primary) .btn-wrap:hover, .btn.edit:not(.btn-primary) .btn-wrap:hover {
       color: var(--btn-reply-text-hover);
     }
-    .btn.reply:not(.btn-primary) .btn-wrap:hover .icon-reply, .btn.reply:not(.btn-primary) .btn-wrap:hover .icon-edit, .btn.edit:not(.btn-primary) .btn-wrap:hover .icon-reply, .btn.edit:not(.btn-primary) .btn-wrap:hover .icon-edit {
+    .btn.reply-comment:not(.btn-primary) .btn-wrap:hover .icon-reply, .btn.reply-comment:not(.btn-primary) .btn-wrap:hover .icon-edit, .btn.edit:not(.btn-primary) .btn-wrap:hover .icon-reply, .btn.edit:not(.btn-primary) .btn-wrap:hover .icon-edit {
       --icon-bg: var(--btn-reply-text-hover);
     }
     .btn.delete .btn-wrap {
@@ -523,11 +523,23 @@
         height: fit-content;
       }
     }
+    .comment .current-user .comment__user--name {
+      text-wrap: nowrap;
+    }
     .comment .current-user .you {
       background-color: var(--bg-interactive-primary);
       color: var(--bg-default-secondary);
       padding: 0.1rem 0.6rem;
       border-radius: var(--radius-100);
+      font-size: small;
+    }
+    .comment .comment__createdAt {
+      text-wrap: nowrap;
+    }
+    .comment .replyingTo {
+      cursor: pointer;
+      color: var(--btn-primary-bg);
+      font-weight: 600;
     }
   }
   @layer comment {
@@ -561,8 +573,9 @@
     .comment-form-container.send .comment-form-container__form label, .comment-form-container.reply .comment-form-container__form label {
       grid-area: 1/1/2/3;
     }
-    .comment-form-container.send .comment-form-container__form .btn.send, .comment-form-container.reply .comment-form-container__form .btn.send {
+    .comment-form-container.send .comment-form-container__form .btn.send, .comment-form-container.send .comment-form-container__form .btn.reply, .comment-form-container.reply .comment-form-container__form .btn.send, .comment-form-container.reply .comment-form-container__form .btn.reply {
       grid-area: 2/2/2/-1;
+      margin-inline-start: auto;
     }
     .comment-form-container.send .comment-form-container__form__user-avatar, .comment-form-container.reply .comment-form-container__form__user-avatar {
       grid-area: 2/1/2/1;

@@ -47,7 +47,7 @@
             }
         }
 
-        &.reply:not(.btn-primary), &.edit:not(.btn-primary){
+        &.reply-comment:not(.btn-primary), &.edit:not(.btn-primary){
             .btn-wrap {
                 color: var(--btn-reply-text);
                 transition: color .1s ;

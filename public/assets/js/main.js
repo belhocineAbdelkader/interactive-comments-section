@@ -66,7 +66,7 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 // ================ fetch data from server ================
 function fetchComments(dataContainer) {
-    fetch('../../public/assets/data/data.json')
+    fetch('../../assets/data/data.json')
         .then(function (response) {
         if (!response.ok) {
             throw new Error("HTTP error: ".concat(response.status));
@@ -137,13 +137,15 @@ function displayComments(container, localData) {
                         allComment.forEach(function (cmnt) {
                             var cmntId = Number(cmnt.dataset.id);
                             if (cmntId === comment.id) {
+                                console.log('comment :', comment);
                                 cmnt.appendChild(subCommentsSection_1);
                                 // append the comments to his sub comments container
-                                subCommentsArr_1.forEach(function (repliedComment) {
+                                subCommentsArr_1.forEach(function (subComment) {
                                     // update the  isCurrentUser to check the replied Comments if one of them is a Current User
-                                    var isCurrentUser = repliedComment.user.username === currUser;
-                                    var isReplyTo = repliedComment.replyingTo;
-                                    var subCmnt = (0, createComment_1.default)(repliedComment.id, repliedComment.content, repliedComment.createdAt, repliedComment.score, repliedComment.user.username, isCurrentUser, isReplyTo);
+                                    var isCurrentUser = subComment.user.username === currUser;
+                                    var isReplyTo = subComment.replyingTo;
+                                    var isReplyToId = "".concat(subComment.replyingToId);
+                                    var subCmnt = (0, createComment_1.default)(subComment.id, subComment.content, subComment.createdAt, subComment.score, subComment.user.username, isCurrentUser, isReplyTo, isReplyToId);
                                     fragmentSubComments_1.appendChild(subCmnt);
                                     subCommentsSection_1.appendChild(fragmentSubComments_1);
                                 });

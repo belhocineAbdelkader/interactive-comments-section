@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // comment Object
-function commentObject(id, content, createdAt, score, username, isSubComment, replyingTo) {
+function commentObject(id, content, createdAt, score, username, isSubComment, replyingTo, replyingToId) {
     if (isSubComment === void 0) { isSubComment = false; }
     if (replyingTo === void 0) { replyingTo = ''; }
+    if (replyingToId === void 0) { replyingToId = ''; }
     var comment = {
         id: id,
         content: content,
@@ -24,6 +25,7 @@ function commentObject(id, content, createdAt, score, username, isSubComment, re
         createdAt: createdAt,
         score: 0,
         replyingTo: replyingTo,
+        replyingToId: "".concat(replyingToId),
         user: {
             image: {
                 png: "./images/avatars/image-".concat(username, ".webp"),

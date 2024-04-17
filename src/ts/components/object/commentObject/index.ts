@@ -1,5 +1,5 @@
 // comment Object
-export default function commentObject(id: number, content: string, createdAt: string, score: number, username: string, isSubComment = false, replyingTo: subComment['replyingTo'] = ''): (comment | subComment) {
+export default function commentObject(id: number, content: string, createdAt: string, score: number, username: string, isSubComment = false, replyingTo: subComment['replyingTo'] = '', replyingToId: subComment['replyingToId'] = ''): (comment | subComment) {
 
   const comment: comment = {
     id: id,
@@ -22,6 +22,7 @@ export default function commentObject(id: number, content: string, createdAt: st
     createdAt: createdAt,
     score: 0,
     replyingTo: replyingTo,
+    replyingToId: `${replyingToId}`,
     user: {
       image: {
         png: `./images/avatars/image-${username}.webp`,

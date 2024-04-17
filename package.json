@@ -11,7 +11,7 @@
     "eslint": "eslint .",
     "prettier": "prettier --write .",
     "linting": "npm-run-all --parallel prettier",
-    "watchSass": " sass --watch src/scss/main.scss public/assets/css/style.css ",
+    "watchSass": " sass --watch src/scss/main.scss ./public/assets/css/style.css ",
     "start": "npm-run-all --parallel dev  watchTS watchSass"
   },
   "devDependencies": {

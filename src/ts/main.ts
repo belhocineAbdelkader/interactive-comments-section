@@ -82,7 +82,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // ================ fetch data from server ================
 function fetchComments(dataContainer: HTMLElement) {
-  fetch('../../public/assets/data/data.json')
+  fetch('../../assets/data/data.json')
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
@@ -111,7 +111,6 @@ function setDataToLocalStorage(data: DataComments) {
     }
   }
 }
-
 // Function to display comments on the web page from the local storage
 function displayComments(container: HTMLElement, localData: DataComments) {
 
@@ -162,13 +161,15 @@ function displayComments(container: HTMLElement, localData: DataComments) {
               const cmntId = Number(cmnt.dataset!.id);
 
               if (cmntId === comment.id) {
+              console.log('comment :', comment);
                 cmnt.appendChild(subCommentsSection);
                 // append the comments to his sub comments container
-                subCommentsArr.forEach(repliedComment => {
+                subCommentsArr.forEach(subComment => {
                   // update the  isCurrentUser to check the replied Comments if one of them is a Current User
-                  const isCurrentUser = repliedComment.user.username === currUser;
-                  const isReplyTo = repliedComment.replyingTo;
-                  const subCmnt = createComment(repliedComment.id, repliedComment.content, repliedComment.createdAt, repliedComment.score, repliedComment.user.username, isCurrentUser, isReplyTo)
+                  const isCurrentUser = subComment.user.username === currUser;
+                  const isReplyTo = subComment.replyingTo;
+                  const isReplyToId = `${subComment.replyingToId}`;
+                  const subCmnt = createComment(subComment.id, subComment.content, subComment.createdAt, subComment.score, subComment.user.username, isCurrentUser, isReplyTo,isReplyToId)
                   fragmentSubComments.appendChild(subCmnt)
                   subCommentsSection.appendChild(fragmentSubComments);
                 });

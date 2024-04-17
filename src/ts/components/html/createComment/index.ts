@@ -1,7 +1,7 @@
 import createCreationTime from "../../../classes/createCreationTime";
 
 // comment Object
-export default function createComment (id: number, content: string, createdAt: string, score: number, user: string, isCurrentUser: boolean = false, isReplyTo?: string) {
+export default function createComment (id: number, content: string, createdAt: string, score: number, user: string, isCurrentUser: boolean = false, isReplyTo?: string, isReplyToId?: string) {
 
   const CurrentUserBtns = `
     <button type="button" class="btn delete">
@@ -44,17 +44,18 @@ export default function createComment (id: number, content: string, createdAt: s
   }
 
   article.setAttribute('data-id', `${id}`);
+  article.setAttribute('id', `${id}`);
   article.insertAdjacentHTML('beforeend', `
   <div class="comment__wrapper">
         <header class="comment__user">
           <img class="comment__user--avatar" src="/assets/images/avatars/image-${user}.webp" alt="User Avatar">
-          <h2 class="comment__user--name">${user}</h2>
+          <h2 class="comment__user--name">${user} ${isCurrentUser ? "<span class='you'>You</span>" : ''}</h2>
           <div class="comment__createdAt">
             <time class="time-createdAt" datetime="${createdAt}">${validDate ? setElapsedTime(createdAt) : createdAt}</time>
           </div>
         </header>
         <p class="comment__content">
-          ${!isReplyTo ? `${content}` : `<span class="replyingTo">@${isReplyTo}</span> ${content}`} 
+          ${!isReplyTo ? `${content}` : `<a href="#${isReplyToId}" class="replyingTo">@${isReplyTo}</a> ${content}`} 
         </p>
         <div class="comment__counter-btns">
           <button type="button" class="btn vote increase">

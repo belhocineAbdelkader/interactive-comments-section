@@ -73,12 +73,24 @@
     }
 
     & .current-user {
+      .comment__user--name{
+        text-wrap: nowrap;
+      }
       .you {
         background-color: var(--bg-interactive-primary);
         color: var(--bg-default-secondary);
         padding: 0.1rem 0.6rem;
         border-radius: var(--radius-100);
+        font-size: small;
       }
+    }
+    .comment__createdAt{
+      text-wrap: nowrap;
+    }
+    .replyingTo{
+      cursor: pointer;
+      color: var(--btn-primary-bg);
+      font-weight: 600;
     }
     // &.comment-in {
     //   height: 0;
